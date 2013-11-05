@@ -6,7 +6,7 @@
 <span class="nv">fsTools      = </span><span class="nx">require</span> <span class="s">&#39;fs-tools&#39;</span>
 <span class="nv">jade         = </span><span class="nx">require</span> <span class="s">&#39;jade&#39;</span>
 <span class="nv">uglifyJs     = </span><span class="nx">require</span> <span class="s">&#39;uglify-js&#39;</span>
-
+<span class="nv">humanize     = </span><span class="nx">require</span> <span class="s">&#39;../utils/humanize&#39;</span>
 <span class="nv">Base = </span><span class="nx">require</span> <span class="s">&#39;./base&#39;</span>
 
 
@@ -30,7 +30,7 @@
       <span class="nx">@copyAssets</span> <span class="nx">callback</span>
 
   <span class="nv">copyAssets: </span><span class="nf">(callback) -&gt;</span>
-    <span class="nx">@log</span><span class="p">.</span><span class="nx">trace</span> <span class="s">&#39;styles.Default#copyAssets(...)&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Even though fsTools.copy creates directories if they're missing - we want a bit more control
+    <span class="nx">@log</span><span class="p">.</span><span class="nx">trace</span> <span class="s">&#39;styles.Default#copyAssets(...)&#39;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Even though fsTools.copy creates directories if they're missing - we want a bit more control
 over it (permissions), as well as wanting to avoid contention.</p></div></div><div class="code"><div class="wrapper">    <span class="nx">fsTools</span><span class="p">.</span><span class="nx">mkdir</span> <span class="nx">@targetAssets</span><span class="p">,</span> <span class="s">&#39;0755&#39;</span><span class="p">,</span> <span class="nf">(error) =&gt;</span>
       <span class="k">if</span> <span class="nx">error</span>
         <span class="nx">@log</span><span class="p">.</span><span class="nx">error</span> <span class="s">&#39;Unable to create directory %s: %s&#39;</span><span class="p">,</span> <span class="nx">@targetAssets</span><span class="p">,</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span>
@@ -108,4 +108,49 @@ over it (permissions), as well as wanting to avoid contention.</p></div></div><d
           <span class="k">return</span> <span class="nx">callback</span> <span class="nx">error</span>
         <span class="nx">@log</span><span class="p">.</span><span class="nx">trace</span> <span class="s">&#39;Wrote %s&#39;</span><span class="p">,</span> <span class="nx">outputPath</span>
 
-        <span class="nx">callback</span><span class="p">()</span></div></div></div></div></body></html>
+        <span class="nx">callback</span><span class="p">()</span>
+
+  <span class="nv">renderDocTags: </span><span class="nf">(segments) -&gt;</span>
+    <span class="k">for</span> <span class="nx">segment</span><span class="p">,</span> <span class="nx">segmentIndex</span> <span class="k">in</span> <span class="nx">segments</span> <span class="k">when</span> <span class="nx">segment</span><span class="p">.</span><span class="nx">tagSections</span><span class="o">?</span>
+
+      <span class="nv">sections = </span><span class="nx">segment</span><span class="p">.</span><span class="nx">tagSections</span>
+      <span class="nv">output = </span><span class="s">&#39;&#39;</span>
+      <span class="nv">metaOutput = </span><span class="s">&#39;&#39;</span>
+      <span class="nv">accessClasses = </span><span class="s">&#39;doc-section&#39;</span>
+
+      <span class="nx">accessClasses</span> <span class="o">+=</span> <span class="s">&quot; doc-section-</span><span class="si">#{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">access</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">access</span><span class="o">?</span>
+
+      <span class="nv">segment.accessClasses = </span><span class="nx">accessClasses</span>
+
+      <span class="nv">firstPart = </span><span class="p">[]</span>
+      <span class="nx">firstPart</span><span class="p">.</span><span class="nx">push</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">access</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">access</span><span class="o">?</span>
+      <span class="nx">firstPart</span><span class="p">.</span><span class="nx">push</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">special</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">special</span><span class="o">?</span>
+      <span class="nx">firstPart</span><span class="p">.</span><span class="nx">push</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">type</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">type</span><span class="o">?</span>
+
+      <span class="nx">metaOutput</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">humanize</span><span class="p">.</span><span class="nx">capitalize</span> <span class="nx">firstPart</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span>
+      <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">flags</span><span class="o">?</span> <span class="o">or</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">metadata</span><span class="o">?</span>
+        <span class="nv">secondPart = </span><span class="p">[]</span>
+        <span class="nx">secondPart</span><span class="p">.</span><span class="nx">push</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">flags</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">flags</span><span class="o">?</span>
+        <span class="nx">secondPart</span><span class="p">.</span><span class="nx">push</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">metadata</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">metadata</span><span class="o">?</span>
+        <span class="nx">metaOutput</span> <span class="o">+=</span> <span class="s">&quot; </span><span class="si">#{</span><span class="nx">humanize</span><span class="p">.</span><span class="nx">joinSentence</span> <span class="nx">secondPart</span><span class="si">}</span><span class="s">&quot;</span>
+
+      <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;&lt;span class=&#39;doc-section-header&#39;&gt;</span><span class="si">#{</span><span class="nx">metaOutput</span><span class="si">}</span><span class="s">&lt;/span&gt;\n\n&quot;</span> <span class="k">if</span> <span class="nx">metaOutput</span> <span class="o">isnt</span> <span class="s">&#39;&#39;</span>
+
+      <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="si">}</span><span class="s">\n\n&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">description</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">description</span><span class="o">?</span>
+
+      <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="si">}</span><span class="s">\n\n&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">todo</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">todo</span><span class="o">?</span>
+
+      <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">params</span><span class="o">?</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="s">&#39;Parameters:\n\n&#39;</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="si">}</span><span class="s">\n\n&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">params</span>
+
+      <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">returns</span><span class="o">?</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">humanize</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">(</span><span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="p">)</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">returns</span> <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">returns</span><span class="o">?</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;&lt;br/&gt;**and** &#39;</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">howto</span><span class="o">?</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;\n\nHow-To:\n\n</span><span class="si">#{</span><span class="nx">humanize</span><span class="p">.</span><span class="nx">gutterify</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="p">,</span> <span class="mi">0</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">howto</span>
+
+      <span class="k">if</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">example</span><span class="o">?</span>
+        <span class="nx">output</span> <span class="o">+=</span> <span class="s">&quot;\n\nExample:\n\n</span><span class="si">#{</span><span class="nx">humanize</span><span class="p">.</span><span class="nx">gutterify</span> <span class="nx">tag</span><span class="p">.</span><span class="nx">markdown</span><span class="p">,</span> <span class="mi">4</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">tag</span> <span class="k">in</span> <span class="nx">sections</span><span class="p">.</span><span class="nx">example</span>
+
+      <span class="nv">segment.comments = </span><span class="nx">output</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;\n&#39;</span></div></div></div></div></body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><title>utils/humanize</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="utils/humanize"><meta name="groc-project-path" content="lib/utils/humanize.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/utils/humanize.coffee">lib/utils/humanize.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">module.exports = humanize =</span>
+  <span class="nv">joinSentence: </span><span class="nf">(parts, conjunctive=&#39;and&#39;) -&gt;</span>
+    <span class="k">if</span> <span class="nx">parts</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span>
+      <span class="p">[</span><span class="nx">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="o">-</span><span class="mi">2</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;, &#39;</span><span class="p">),</span> <span class="nx">parts</span><span class="p">[</span><span class="nx">parts</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]].</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot;, </span><span class="si">#{</span><span class="nx">conjunctive</span><span class="si">}</span><span class="s"> &quot;</span><span class="p">)</span>
+    <span class="k">else</span>
+      <span class="nx">parts</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot; </span><span class="si">#{</span><span class="nx">conjunctive</span><span class="si">}</span><span class="s"> &quot;</span><span class="p">)</span>
+
+  <span class="nv">capitalize: </span><span class="nf">(sentence) -&gt;</span>
+    <span class="k">if</span> <span class="nx">sentence</span><span class="p">.</span><span class="nx">length</span>
+      <span class="nv">parts = </span><span class="nx">sentence</span><span class="p">.</span><span class="nx">match</span> <span class="sr">/^(\s*)([_\*`]*)(\s*)(\w)(.*)$/m</span>
+      <span class="s">&quot;</span><span class="si">#{</span><span class="nx">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}#{</span><span class="nx">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}#{</span><span class="nx">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}#{</span><span class="nx">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}#{</span><span class="nx">parts</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="k">else</span>
+      <span class="s">&#39;&#39;</span>
+
+  <span class="nv">article: </span><span class="nf">(word) -&gt;</span>
+    <span class="k">if</span> <span class="nx">word</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="k">in</span> <span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;i&#39;</span><span class="p">,</span> <span class="s">&#39;o&#39;</span><span class="p">,</span> <span class="s">&#39;u&#39;</span><span class="p">]</span>
+      <span class="s">&#39;an&#39;</span>
+    <span class="k">else</span>
+      <span class="s">&#39;a&#39;</span>
+
+  <span class="nv">pluralizationRules: </span><span class="p">[</span>
+    <span class="p">{</span> <span class="nv">regex: </span><span class="sr">/([bcdfghjklmnpqrstvwxz])y$/</span><span class="p">,</span> <span class="nv">replacement: </span><span class="s">&#39;$1ies&#39;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nv">regex: </span><span class="sr">/(ch|sh|x|ss|s)$/</span><span class="p">,</span> <span class="nv">replacement: </span><span class="s">&#39;$1es&#39;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="nv">regex: </span><span class="sr">/$/</span><span class="p">,</span> <span class="nv">replacement: </span><span class="s">&#39;s&#39;</span> <span class="p">}</span>
+  <span class="p">]</span>
+
+  <span class="nv">pluralize: </span><span class="nf">(word) -&gt;</span>
+    <span class="k">return</span> <span class="nx">word</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">rule</span><span class="p">.</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">rule</span><span class="p">.</span><span class="nx">replacement</span><span class="p">)</span> <span class="k">for</span> <span class="nx">rule</span> <span class="k">in</span> <span class="nx">humanize</span><span class="p">.</span><span class="nx">pluralizationRules</span> <span class="k">when</span> <span class="nx">rule</span><span class="p">.</span><span class="nx">regex</span><span class="p">.</span><span class="nx">test</span> <span class="nx">word</span>
+
+  <span class="nv">gutterify: </span><span class="nf">(text, gutterWidth) -&gt;</span>
+    <span class="nv">extantMimimumGutterWidth = </span><span class="mi">0</span>
+
+    <span class="k">if</span> <span class="nx">text</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^ +/gm</span><span class="p">)</span>
+      <span class="nv">extantMinimumGutterWidth = </span><span class="nx">text</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^ +/gm</span><span class="p">).</span><span class="nx">sort</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span>
+
+    <span class="nv">gutter = </span><span class="s">&#39;            &#39;</span><span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="nx">gutterWidth</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nv">regex = </span><span class="sr">///^\s{</span><span class="si">#{</span><span class="nx">extantMinimumGutterWidth</span><span class="si">}</span><span class="sr">}///gm</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span> <span class="nx">regex</span><span class="p">,</span> <span class="nx">gutter</span></div></div></div></div></body></html>
