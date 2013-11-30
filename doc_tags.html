@@ -1,16 +1,11 @@
 <!DOCTYPE html><html lang="en"><head><title>doc_tags</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="doc_tags"><meta name="groc-project-path" content="lib/doc_tags.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/doc_tags.coffee">lib/doc_tags.coffee</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="known-doc-tags">Known Doc Tags</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper">humanize = <span class="built_in">require</span> <span class="string">'./utils/humanize'</span></div></div></div><div class="segment"><div class="comments doc-section doc-section-private"><div class="wrapper"><p><span class='doc-section-header'>Private method collapse_space</span></p>
-
 <p>This function collapses... spaces</p>
-
 <p>Parameters:</p>
-
 <ul>
 <li><strong>value must be a String.</strong><br/>(This is the value which will be collapsed. The primary purpose of this method is to allow multiline parameter descriptions, just like this one.)</li>
 </ul>
-
 <p><strong>Returns a String</strong></p></div></div><div class="code"><div class="wrapper"><span class="function"><span class="title">collapse_space</span> = <span class="params">(value)</span> -&gt;</span>
   value.replace <span class="regexp">/\s+/g</span>, <span class="string">' '</span></div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public module DOC<em>TAGS of type _Object</em></span></p>
-
 <p>This is a sample doc tagged block comment</p></div></div><div class="code"><div class="wrapper">module.<span class="built_in">exports</span> = DOC_TAGS =
   <span class="attribute">description</span>:
     <span class="attribute">section</span>:     <span class="string">'description'</span>
@@ -99,15 +94,11 @@
 
   <span class="attribute">param</span>:
     <span class="attribute">section</span>:     <span class="string">'params'</span></div></div></div><div class="segment"><div class="comments doc-section doc-section-public"><div class="wrapper"><p><span class='doc-section-header'>Public method parseValue</span></p>
-
 <p>parses function parameters</p>
-
 <p>Parameters:</p>
-
 <ul>
 <li><strong>value must be a String.</strong><br/>(Text that follows @param)</li>
 </ul>
-
 <p><strong>Returns an Object</strong></p></div></div><div class="code"><div class="wrapper">    <span class="attribute">parseValue</span>:  <span class="function"><span class="params">(value)</span> -&gt;</span>
       parts = collapse_space(value).match <span class="regexp">/^\{([^\}]+)\}\s+(\[?)([\w\.\$]+)(?:=([^\s\]]+))?(\]?)\s*(.*)$/</span>
       <span class="attribute">types</span>:        (parts[<span class="number">1</span>]?.split <span class="regexp">/\|{1,2}/g</span>)
@@ -116,22 +107,26 @@
       <span class="attribute">isSubParam</span>:   <span class="regexp">/\./</span>.test parts[<span class="number">3</span>]
       <span class="attribute">defaultValue</span>: parts[<span class="number">4</span>]
       <span class="attribute">description</span>:  parts[<span class="number">6</span>]</div></div></div><div class="segment"><div class="comments doc-section doc-section-private"><div class="wrapper"><p><span class='doc-section-header'>Private method markdown</span></p>
-
 <p>converts parsed values to markdown text</p>
-
 <p>Parameters:</p>
-
 <ul>
 <li><p><strong>value must be an Object.</strong></p>
-
-<ul><li><p><strong>value.types must be an Array of Strings.</strong></p></li>
-<li><p><strong>value.isOptional must be a Boolean and has a default value of false.</strong></p></li>
-<li><p><strong>value.varName must be a String.</strong></p></li>
-<li><p><strong>value.isSubParam must be a Boolean and has a default value of false.</strong></p></li>
-<li><p><strong>value.defaultValue is optional and must be a String.</strong></p></li>
-<li><p><strong>value.description is optional and must be a String.</strong></p></li></ul></li>
+<ul>
+<li><p><strong>value.types must be an Array of Strings.</strong></p>
+</li>
+<li><p><strong>value.isOptional must be a Boolean and has a default value of false.</strong></p>
+</li>
+<li><p><strong>value.varName must be a String.</strong></p>
+</li>
+<li><p><strong>value.isSubParam must be a Boolean and has a default value of false.</strong></p>
+</li>
+<li><p><strong>value.defaultValue is optional and must be a String.</strong></p>
+</li>
+<li><p><strong>value.description is optional and must be a String.</strong></p>
+</li>
 </ul>
-
+</li>
+</ul>
 <p><strong>Returns a String</strong><br/>(should be in markdown syntax)</p></div></div><div class="code"><div class="wrapper">    <span class="attribute">markdown</span>:    <span class="function"><span class="params">(value)</span> -&gt;</span>
       types = (
         <span class="keyword">for</span> type <span class="keyword">in</span> value.types

@@ -18,13 +18,13 @@ list-style options, we always want an array.</li>
 </ul></div></div><div class="code"><div class="wrapper">    <span class="keyword">for</span> optName, optConfig <span class="keyword">of</span> config
       <span class="keyword">if</span> optConfig.type == <span class="string">'list'</span> <span class="keyword">and</span> <span class="keyword">not</span> _.isArray opts.argv[optName]
         argv[optName] = _.compact [ argv[optName] ]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>It's also handy to auto-resolve paths.</li>
+<li>It&#39;s also handy to auto-resolve paths.</li>
 </ul></div></div><div class="code"><div class="wrapper">    <span class="keyword">for</span> optName, optConfig <span class="keyword">of</span> config
       argv[optName] = path.resolve argv[optName] <span class="keyword">if</span> optConfig.type == <span class="string">'path'</span>
 
     argv</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="guessprimarygithuburl">guessPrimaryGitHubURL</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="attribute">guessPrimaryGitHubURL</span>: <span class="function"><span class="params">(repository_url, callback)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p><code>git config --list</code> provides information about branches and remotes - everything we need to
-attempt to guess the project's GitHub repository.
-There are several states that a GitHub-based repository could be in, and we've probably missed
+attempt to guess the project&#39;s GitHub repository.
+There are several states that a GitHub-based repository could be in, and we&#39;ve probably missed
 a few.  We attempt to guess it through a few means:</p></div></div><div class="code"><div class="wrapper">    childProcess.exec <span class="string">'git config --list'</span>, <span class="function"><span class="params">(error, stdout, stderr)</span> =&gt;</span>
       <span class="keyword">return</span> error <span class="keyword">if</span> error
 

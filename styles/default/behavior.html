@@ -14,10 +14,10 @@ toc$ = <span class="literal">null</span>
 <span class="function"><span class="title">toggleTableOfContents</span> = -&gt;</span>
   setTableOfContentsActive <span class="keyword">not</span> nav$.hasClass <span class="string">'active'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="node-navigation">Node Navigation</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">currentNode$ = <span class="literal">null</span>
 
-<span class="function"><span class="title">focusCurrentNode</span> = -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the first child's offset top rather than toc$.offset().top because there may be borders
+<span class="function"><span class="title">focusCurrentNode</span> = -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the first child&#39;s offset top rather than toc$.offset().top because there may be borders
 or other stylistic tweaks that further offset the scrollTop.</p></div></div><div class="code"><div class="wrapper">  currentNodeTop    = currentNode$.offset().top - toc$.children(<span class="string">':visible'</span>).first().offset().top
   currentNodeBottom = currentNodeTop + currentNode$.children(<span class="string">'.label'</span>).height()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the current node is partially or fully above the top of the viewport, scroll it into view.</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">if</span> currentNodeTop &lt; toc$.scrollTop()
-    toc$.scrollTop currentNodeTop</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Similarly, if we're below the bottom of the viewport, scroll up enough to make it visible.</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">if</span> currentNodeBottom &gt; toc$.scrollTop() + toc$.height()
+    toc$.scrollTop currentNodeTop</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Similarly, if we&#39;re below the bottom of the viewport, scroll up enough to make it visible.</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">if</span> currentNodeBottom &gt; toc$.scrollTop() + toc$.height()
     toc$.scrollTop currentNodeBottom - toc$.height()
 
 <span class="function"><span class="title">setCurrentNodeExpanded</span> = <span class="params">(expanded)</span> -&gt;</span>
@@ -25,14 +25,14 @@ or other stylistic tweaks that further offset the scrollTop.</p></div></div><div
     currentNode$.addClass <span class="string">'expanded'</span>
   <span class="keyword">else</span>
     <span class="keyword">if</span> currentNode$.hasClass <span class="string">'expanded'</span>
-      currentNode$.removeClass <span class="string">'expanded'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We collapse up to the node's parent if the current node is already collapsed.  This allows
+      currentNode$.removeClass <span class="string">'expanded'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We collapse up to the node&#39;s parent if the current node is already collapsed.  This allows
 a user to quickly spam left to move up the tree.</p></div></div><div class="code"><div class="wrapper">    <span class="keyword">else</span>
       parents$ = currentNode$.parents(<span class="string">'li'</span>)
       selectNode parents$.first() <span class="keyword">if</span> parents$.length &gt; <span class="number">0</span>
 
   focusCurrentNode()
 
-<span class="function"><span class="title">selectNode</span> = <span class="params">(newNode$)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Remove first, in case it's the same node</p></div></div><div class="code"><div class="wrapper">  currentNode$.removeClass <span class="string">'selected'</span>
+<span class="function"><span class="title">selectNode</span> = <span class="params">(newNode$)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Remove first, in case it&#39;s the same node</p></div></div><div class="code"><div class="wrapper">  currentNode$.removeClass <span class="string">'selected'</span>
   newNode$.addClass <span class="string">'selected'</span>
 
   currentNode$ = newNode$
@@ -123,7 +123,6 @@ currentQuery = <span class="string">''</span>
 
 <span class="function"><span class="title">clearHighlight</span> = <span class="params">(text$)</span> -&gt;</span>
   text$.text text$.text() <span class="comment"># Strip all tags</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="dom-construction">DOM Construction</h2>
-
 <p>Navigation and the table of contents are entirely managed by us.</p></div></div><div class="code"><div class="wrapper">fileMap = {} <span class="comment"># A map of targetPath -&gt; DOM node</span>
 
 <span class="function"><span class="title">buildNav</span> = <span class="params">(metaInfo)</span> -&gt;</span>
@@ -210,9 +209,9 @@ $<span class="function"> -&gt;</span>
 
   nav$    = buildNav metaInfo
   toc$    = nav$.find <span class="string">'.toc'</span>
-  search$ = $(<span class="string">'#search'</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Select the current file, and expand up to it</p></div></div><div class="code"><div class="wrapper">  selectNodeByDocumentPath metaInfo.documentPath, window.location.hash.replace <span class="string">'#'</span>, <span class="string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the search box's focus state to toggle the table of contents.  This ensures that search
-will always be focused while the toc is up, and that it goes away once the user clicks off.</p></div></div><div class="code"><div class="wrapper">  search$.focus<span class="function"> -&gt;</span> setTableOfContentsActive <span class="literal">true</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>However, we don't want to hide the table of contents if you are clicking around in the nav.
-The blur event doesn't give us the previous event, sadly, so we first trap mousedown events</p></div></div><div class="code"><div class="wrapper">  lastMousedownTimestamp = <span class="literal">null</span>
+  search$ = $(<span class="string">'#search'</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Select the current file, and expand up to it</p></div></div><div class="code"><div class="wrapper">  selectNodeByDocumentPath metaInfo.documentPath, window.location.hash.replace <span class="string">'#'</span>, <span class="string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the search box&#39;s focus state to toggle the table of contents.  This ensures that search
+will always be focused while the toc is up, and that it goes away once the user clicks off.</p></div></div><div class="code"><div class="wrapper">  search$.focus<span class="function"> -&gt;</span> setTableOfContentsActive <span class="literal">true</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>However, we don&#39;t want to hide the table of contents if you are clicking around in the nav.
+The blur event doesn&#39;t give us the previous event, sadly, so we first trap mousedown events</p></div></div><div class="code"><div class="wrapper">  lastMousedownTimestamp = <span class="literal">null</span>
   nav$.mousedown <span class="function"><span class="params">(evt)</span> -&gt;</span>
     lastMousedownTimestamp = evt.timeStamp <span class="keyword">unless</span> evt.target == toggle$[<span class="number">0</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And we refocus search if we are within a very short duration between the last mousedown in nav$.</p></div></div><div class="code"><div class="wrapper">  search$.blur <span class="function"><span class="params">(evt)</span> -&gt;</span>
     <span class="keyword">if</span> evt.timeStamp - lastMousedownTimestamp &lt; <span class="number">10</span>

@@ -1,10 +1,9 @@
 <!DOCTYPE html><html lang="en"><head><title>utils/style_helpers</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="utils/style_helpers"><meta name="groc-project-path" content="lib/utils/style_helpers.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/utils/style_helpers.coffee">lib/utils/style_helpers.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">path = <span class="built_in">require</span> <span class="string">'path'</span>
 
 _ = <span class="built_in">require</span> <span class="string">'underscore'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h1 id="style-helpers">Style Helpers</h1>
-
 <p>A collection of helpful functions to support styles and their behavior.</p></div></div><div class="code"><div class="wrapper">module.<span class="built_in">exports</span> = StyleHelpers =</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Generate a table of contents as a tree of {node: {...}, children: []} objects.
 We want a pretty complex hierarchy in our table of contents:
-buildTableOfContents: (files) -></p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Given an array of markdowned segments, convert their list of headers into a hierarchical
+buildTableOfContents: (files) -&gt;</p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Given an array of markdowned segments, convert their list of headers into a hierarchical
 outline (table of contents!)</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">outlineHeaders</span>: <span class="function"><span class="params">(segments)</span> -&gt;</span>
     headers = segments.reduce <span class="function"><span class="params">( (a, s) -&gt; a.concat s.headers )</span>, []
     <span class="title">return</span> [] <span class="title">unless</span> <span class="title">headers</span>.<span class="title">length</span> &gt; 0
@@ -26,7 +25,7 @@ We want a pretty complex hierarchy in our table of contents:</p></div></div><div
       <span class="keyword">return</span>  <span class="number">1</span> <span class="keyword">if</span> b.targetPath == <span class="string">'index'</span>
 
       <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> a.targetPath == b.targetPath</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>files matching a directory name come directly before it.  E.g. "foo" &lt; "foo/bar" &lt; "foz"</li>
+<li>files matching a directory name come directly before it.  E.g. &quot;foo&quot; &lt; &quot;foo/bar&quot; &lt; &quot;foz&quot;</li>
 </ul></div></div><div class="code"><div class="wrapper">      <span class="keyword">if</span> a.targetPath &lt; b.targetPath <span class="keyword">then</span> -<span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span>
 
     nodes    = []
@@ -34,7 +33,7 @@ We want a pretty complex hierarchy in our table of contents:</p></div></div><div
     <span class="keyword">for</span> file <span class="keyword">in</span> files
       targetChunks = file.targetPath.split path.join(<span class="string">'/'</span>)
       pathChunks   = targetChunks[<span class="number">0.</span>..-<span class="number">1</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>If a file has the same name as a directory, it takes ownership of that directory's folder.</li>
+<li>If a file has the same name as a directory, it takes ownership of that directory&#39;s folder.</li>
 </ul></div></div><div class="code"><div class="wrapper">      <span class="keyword">for</span> chunk, i <span class="keyword">in</span> pathChunks
         <span class="keyword">if</span> prevPath[i] != chunk</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
 <li>Otherwise we have a generic folder node that takes its place in the table of contents.
@@ -56,7 +55,7 @@ If possible, we use the initial header in the file,</p></div></div><div class="c
         fileData.title       = fileData.firstHeader.data.title
 
         <span class="keyword">if</span> fileData.firstHeader.children?.length &gt; <span class="number">0</span>
-          outlines[file.targetPath] = fileData.firstHeader.children.concat outlines[file.targetPath]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Otherwise we just fall back to the file's target path...</p></div></div><div class="code"><div class="wrapper">      <span class="keyword">else</span>
+          outlines[file.targetPath] = fileData.firstHeader.children.concat outlines[file.targetPath]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Otherwise we just fall back to the file&#39;s target path...</p></div></div><div class="code"><div class="wrapper">      <span class="keyword">else</span>
         fileData.title = <span class="keyword">if</span> file.targetPath == <span class="string">'index'</span> <span class="keyword">then</span> file.pageTitle <span class="keyword">else</span> path.basename file.targetPath
 
       nodes.push

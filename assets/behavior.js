@@ -90,8 +90,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 2,
-                "title": "What's in the works?",
-                "slug": "whats-in-the-works"
+                "title": "What&#39;s in the works?",
+                "slug": "what39s-in-the-works"
               },
               "depth": 2
             }
@@ -164,8 +164,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "type": "heading",
           "data": {
             "level": 2,
-            "title": "What's in the works?",
-            "slug": "whats-in-the-works"
+            "title": "What&#39;s in the works?",
+            "slug": "what39s-in-the-works"
           },
           "depth": 2
         }

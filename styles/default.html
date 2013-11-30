@@ -30,7 +30,7 @@ module.<span class="built_in">exports</span> = <span class="class"><span class="
       <span class="property">@copyAssets</span> callback
 
   <span class="attribute">copyAssets</span>: <span class="function"><span class="params">(callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#copyAssets(...)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Even though fsTools.copy creates directories if they're missing - we want a bit more control
+    <span class="property">@log</span>.trace <span class="string">'styles.Default#copyAssets(...)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Even though fsTools.copy creates directories if they&#39;re missing - we want a bit more control
 over it (permissions), as well as wanting to avoid contention.</p></div></div><div class="code"><div class="wrapper">    fsTools.mkdir <span class="property">@targetAssets</span>, <span class="string">'0755'</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
       <span class="keyword">if</span> error
         <span class="property">@log</span>.error <span class="string">'Unable to create directory %s: %s'</span>, <span class="property">@targetAssets</span>, error.message
