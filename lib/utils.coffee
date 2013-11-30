@@ -464,7 +464,7 @@ module.exports = Utils =
       @comments = comments
       @foldMarker = foldMarker
 
-  # Annotate an array of segments using [highlight.js][http://highlightjs.org/]
+  # Annotate an array of segments using [highlight.js](http://highlightjs.org/)
   highlightCode: (segments, language, callback) ->
     lang = language.highlightJS or language.pygmentsLexer or ''
     doHighlight = do ->
