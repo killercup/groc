@@ -8,6 +8,7 @@ module.exports = LANGUAGES =
   C:
     nameMatchers:      ['.c', '.h']
     pygmentsLexer:     'c'
+    highlightJS:       'cpp'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -15,6 +16,7 @@ module.exports = LANGUAGES =
   CSharp:
     nameMatchers:      ['.cs']
     pygmentsLexer:     'csharp'
+    highlightJS:       'cs'
     multiLineComment:  ['/*', '*', '*/']
     singleLineComment: ['//']
     ignorePrefix:      '}'
@@ -37,6 +39,7 @@ module.exports = LANGUAGES =
   CoffeeScript:
     nameMatchers:      ['.coffee', 'Cakefile']
     pygmentsLexer:     'coffee-script'
+    highlightJS:       'coffeescript'
     # **CoffeScript's multi-line block-comment styles.**
 
     # - Variant 1:
@@ -97,6 +100,7 @@ module.exports = LANGUAGES =
   Handlebars:
     nameMatchers:      ['.handlebars', '.hbs']
     pygmentsLexer:     'html' # TODO: is there a handlebars/mustache lexer? Nope. Lame.
+    highlightJS:       'handlebars'
     multiLineComment:  [
       '<!--', '', '-->', # HTML block comments go first, for code highlighting / segment splitting purposes
       '{{!',  '', '}}'   # Actual handlebars block comments
@@ -117,6 +121,8 @@ module.exports = LANGUAGES =
   Jade:
     nameMatchers:      ['.jade']
     pygmentsLexer:     'jade'
+    # @todo <https://github.com/isagalaev/highlight.js/pull/250>
+    highlightJS:       'AUTO'
     singleLineComment: ['//', '//-']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -151,6 +157,7 @@ module.exports = LANGUAGES =
   LaTeX:
     nameMatchers:      ['.tex', '.latex', '.sty']
     pygmentsLexer:     'latex'
+    highlightJS:       'tex'
     singleLineComment: ['%']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -158,6 +165,7 @@ module.exports = LANGUAGES =
   LESS:
     nameMatchers:      ['.less']
     pygmentsLexer:     'sass' # TODO: is there a less lexer? No. Maybe in the future.
+    highlightJS:       'scss'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -179,6 +187,7 @@ module.exports = LANGUAGES =
   Mustache:
     nameMatchers:      ['.mustache']
     pygmentsLexer:     'html' # TODO: is there a handlebars/mustache lexer? Nope. Lame.
+    highlightJS:       'handlebars'
     multiLineComment:  ['{{!', '', '}}']
     ignorePrefix:      '#'
     foldPrefix:        '^'
@@ -186,6 +195,7 @@ module.exports = LANGUAGES =
   'Objective-C':
     nameMatchers:      ['.m', '.mm']
     pygmentsLexer:     'objc'
+    highlightJS:       'objectivec'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -207,6 +217,7 @@ module.exports = LANGUAGES =
   Puppet:
     nameMatchers:      ['.pp']
     pygmentsLexer:     'puppet'
+    highlightJS:       'AUTO'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -228,6 +239,7 @@ module.exports = LANGUAGES =
   Sass:
     nameMatchers:      ['.sass']
     pygmentsLexer:     'sass'
+    highlightJS:       'AUTO'
     singleLineComment: ['//']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -243,6 +255,7 @@ module.exports = LANGUAGES =
   Shell:
     nameMatchers:      ['.sh']
     pygmentsLexer:     'sh'
+    highlightJS:       'bash'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
@@ -257,6 +270,7 @@ module.exports = LANGUAGES =
   YAML:
     nameMatchers:      ['.yml', '.yaml']
     pygmentsLexer:     'yaml'
+    highlightJS:       'AUTO'
     singleLineComment: ['#']
     ignorePrefix:      '}'
     foldPrefix:        '^'
