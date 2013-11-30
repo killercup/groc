@@ -1,37 +1,38 @@
-<!DOCTYPE html><html lang="en"><head><title>styles/default/docPage</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/docPage"><meta name="groc-project-path" content="lib/styles/default/docPage.jade"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/docPage.jade">lib/styles/default/docPage.jade</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nn">!!! 5</span>
-<span class="nt">html</span>(<span class="na">lang=</span><span class="s">&quot;en&quot;</span>)
-  <span class="nt">head</span>
-    <span class="nt">title</span><span class="p">=</span> <span class="n">pageTitle</span>
-  <span class="nt">meta</span>(<span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span>)
-  <span class="nt">meta</span>(<span class="na">name=</span><span class="s">&quot;viewport&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0&quot;</span>)
-  <span class="nt">meta</span>(<span class="na">name=</span><span class="s">&quot;groc-relative-root&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="nv">relativeRoot</span>)
-  <span class="nt">meta</span>(<span class="na">name=</span><span class="s">&quot;groc-document-path&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="nv">targetPath</span>)
-  <span class="nt">meta</span>(<span class="na">name=</span><span class="s">&quot;groc-project-path&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="nv">projectPath</span>)
-  <span class="p">-</span> <span class="k">if</span> <span class="o">(</span><span class="n">project</span><span class="o">.</span><span class="n">githubURL</span><span class="o">)</span>
-    <span class="nt">meta</span>(<span class="na">name=</span><span class="s">&quot;groc-github-url&quot;</span><span class="err">,</span> <span class="na">content=</span><span class="nv">project</span><span class="err">.</span><span class="na">githubURL</span>)
-  <span class="nt">link</span>(<span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="err">,</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="err">,</span> <span class="na">media=</span><span class="s">&quot;all&quot;</span><span class="err">,</span> <span class="na">href=</span><span class="nv">relativeRoot</span> <span class="err">+</span> <span class="err">&quot;</span><span class="na">assets</span><span class="err">/</span><span class="na">style</span><span class="err">.</span><span class="na">css</span><span class="err">&quot;</span>)
-  <span class="nt">script</span>(<span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="err">,</span> <span class="na">src=</span><span class="nv">relativeRoot</span> <span class="err">+</span> <span class="err">&quot;</span><span class="na">assets</span><span class="err">/</span><span class="na">behavior</span><span class="err">.</span><span class="na">js</span><span class="err">&quot;</span>)
+<!DOCTYPE html><html lang="en"><head><title>styles/default/docPage</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/docPage"><meta name="groc-project-path" content="lib/styles/default/docPage.jade"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/docPage.jade">lib/styles/default/docPage.jade</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">!!! <span class="number">5</span>
+html(lang=<span class="string">"en"</span>)
+  head
+    title= pageTitle
+  meta(http-equiv=<span class="string">"Content-Type"</span>, content=<span class="string">"text/html; charset=utf-8"</span>)
+  meta(name=<span class="string">"viewport"</span>, content=<span class="string">"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"</span>)
+  meta(name=<span class="string">"groc-relative-root"</span>, content=relativeRoot)
+  meta(name=<span class="string">"groc-document-path"</span>, content=targetPath)
+  meta(name=<span class="string">"groc-project-path"</span>, content=projectPath)
+  - <span class="keyword">if</span> (project.githubURL)
+    meta(name=<span class="string">"groc-github-url"</span>, content=project.githubURL)
+  link(rel=<span class="string">"stylesheet"</span>, type=<span class="string">"text/css"</span>, media=<span class="string">"all"</span>, href=relativeRoot + <span class="string">"assets/style.css"</span>)
+  script(type=<span class="string">"text/javascript"</span>, src=relativeRoot + <span class="string">"assets/behavior.js"</span>)
 
-  <span class="nt">body</span>
-    <span class="nf">#meta</span>
-      <span class="p">-</span> <span class="k">if</span> <span class="o">(</span><span class="n">project</span><span class="o">.</span><span class="n">githubURL</span><span class="o">)</span>
-        <span class="nc">.file-path</span>
-          <span class="nt">a</span>(<span class="na">href=</span><span class="nv">project</span><span class="err">.</span><span class="na">githubURL</span> <span class="err">+</span> <span class="err">&#39;/</span><span class="na">blob</span><span class="err">/</span><span class="na">master</span><span class="err">/&#39;</span> <span class="err">+</span> <span class="na">projectPath</span>)<span class="p">=</span> <span class="n">projectPath</span>
-      <span class="p">-</span> <span class="k">else</span>
-        <span class="nc">.file-path</span><span class="p">=</span> <span class="n">projectPath</span>
-    <span class="nf">#document</span>
-      <span class="p">-</span> <span class="k">for</span> <span class="o">(</span><span class="k">var</span> <span class="n">i</span> <span class="n">in</span> <span class="n">segments</span><span class="o">)</span>
-        <span class="nc">.segment</span>
-          <span class="p">-</span> <span class="k">if</span> <span class="o">(</span><span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">markdownedComments</span> <span class="o">!=</span> <span class="err">&#39;&#39;</span><span class="o">)</span>
-            <span class="nt">div</span>(<span class="na">class=</span><span class="s">&quot;comments &quot;</span> <span class="err">+</span> <span class="err">(</span><span class="na">segments</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">accessClasses</span> <span class="err">||</span> <span class="err">&#39;&#39;</span>))
-              <span class="nc">.wrapper</span><span class="p">!=</span> <span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">markdownedComments</span>
+  body
+    <span class="preprocessor">#meta</span>
+      - <span class="keyword">if</span> (project.githubURL)
+        .file-path
+          a(href=project.githubURL + <span class="string">'/blob/master/'</span> + projectPath)= projectPath
+      - <span class="keyword">else</span>
+        .file-path= projectPath
+    <span class="preprocessor">#document</span>
+      - <span class="keyword">for</span> (var i in segments)
+        .segment
+          - <span class="keyword">if</span> (segments[i].markdownedComments != <span class="string">''</span>)
+            <span class="keyword">div</span>(<span class="class"><span class="keyword">class</span>="<span class="title">comments</span> " + (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">accessClasses</span> || ''))
+              .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">markdownedComments</span>
 
-          <span class="p">-</span> <span class="k">if</span> <span class="o">(</span><span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">highlightedCode</span> <span class="o">!=</span> <span class="err">&#39;&#39;</span><span class="o">)</span>
-            <span class="p">-</span> <span class="k">if</span> <span class="o">(</span><span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">foldMarker</span> <span class="o">!=</span> <span class="err">&#39;&#39;</span><span class="o">)</span>
-              <span class="nc">.code.folded</span>
-                <span class="nc">.wrapper.marker</span>
-                  <span class="nt">span</span><span class="nc">.c1</span><span class="p">!=</span> <span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">foldMarker</span>
-                <span class="nc">.wrapper</span><span class="p">!=</span> <span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">highlightedCode</span>
-            <span class="p">-</span> <span class="k">else</span>
-              <span class="nc">.code</span>
-                <span class="nc">.wrapper</span><span class="p">!=</span> <span class="n">segments</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="n">highlightedCode</span></div></div></div></div></body></html>
+          - <span class="title">if</span> (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span> != '')
+            - <span class="title">if</span> (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">foldMarker</span> != '')
+              .<span class="title">code</span>.<span class="title">folded</span>
+                .<span class="title">wrapper</span>.<span class="title">marker</span>
+                  <span class="title">span</span>.<span class="title">c1</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">foldMarker</span>
+                .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span>
+            - <span class="title">else</span>
+              .<span class="title">code</span>
+                .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span>
+</span></div></div></div></div></body></html>

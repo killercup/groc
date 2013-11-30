@@ -193,6 +193,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -309,6 +310,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -340,6 +342,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -388,6 +391,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -427,6 +431,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".sh"],
               "pygmentsLexer": "sh",
+              "highlightJS": "bash",
               "singleLineComment": ["#"],
               "ignorePrefix": "}",
               "foldPrefix": "^",
@@ -448,6 +453,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -470,6 +476,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -491,6 +498,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -513,6 +521,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "language": {
                   "nameMatchers": [".coffee", "Cakefile"],
                   "pygmentsLexer": "coffee-script",
+                  "highlightJS": "coffeescript",
                   "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
                   "strictMultiLineEnd": false,
                   "singleLineComment": ["#"],
@@ -582,6 +591,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "language": {
                   "nameMatchers": [".jade"],
                   "pygmentsLexer": "jade",
+                  "highlightJS": "AUTO",
                   "singleLineComment": ["//", "//-"],
                   "ignorePrefix": "}",
                   "foldPrefix": "^",
@@ -601,6 +611,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "language": {
                   "nameMatchers": [".sass"],
                   "pygmentsLexer": "sass",
+                  "highlightJS": "AUTO",
                   "singleLineComment": ["//"],
                   "ignorePrefix": "}",
                   "foldPrefix": "^",
@@ -755,6 +766,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "language": {
           "nameMatchers": [".coffee", "Cakefile"],
           "pygmentsLexer": "coffee-script",
+          "highlightJS": "coffeescript",
           "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
           "strictMultiLineEnd": false,
           "singleLineComment": ["#"],
@@ -777,6 +789,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -835,6 +848,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -856,6 +870,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -877,6 +892,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
@@ -908,6 +924,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "language": {
               "nameMatchers": [".coffee", "Cakefile"],
               "pygmentsLexer": "coffee-script",
+              "highlightJS": "coffeescript",
               "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
               "strictMultiLineEnd": false,
               "singleLineComment": ["#"],
