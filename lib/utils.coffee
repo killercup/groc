@@ -64,13 +64,9 @@ module.exports = Utils =
     # Ensure that we're dealing with absolute paths across the board.
     files = files.map (f) -> path.resolve resolveRoot, f
 
-    console.log "original strip prefixes", stripPrefixes
-
     # And that the strip prefixes all end with a /, avoids absolute target path.
     stripPrefixes = stripPrefixes.map (p) ->
       path.join "#{path.resolve resolveRoot, p}#{CompatibilityHelpers.pathSep}"
-
-    console.log "strip prefixes", stripPrefixes
 
     # Prefixes are stripped in the order of most specific to least
     # (# of directories deep)
