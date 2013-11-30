@@ -269,7 +269,7 @@ TODO: <em>Alternative (b)</em>: Improve folded comments visual appearance in sin
     <span class="attribute">constructor</span>: <span class="function"><span class="params">(code=[], comments=[], foldMarker=<span class="string">''</span>)</span> -&gt;</span>
       <span class="property">@code</span>     = code
       <span class="property">@comments</span> = comments
-      <span class="property">@foldMarker</span> = foldMarker</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments using [highlight.js][http://highlightjs.org/]</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCode</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span>
+      <span class="property">@foldMarker</span> = foldMarker</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments using <a href="http://highlightjs.org/">highlight.js</a></p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCode</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span>
     lang = language.highlightJS <span class="keyword">or</span> language.pygmentsLexer <span class="keyword">or</span> <span class="string">''</span>
     doHighlight = <span class="keyword">do</span><span class="function"> -&gt;</span>
       <span class="keyword">if</span> (lang <span class="keyword">is</span> <span class="string">'AUTO'</span>) <span class="keyword">or</span> (lang <span class="keyword">is</span> <span class="string">''</span>)
