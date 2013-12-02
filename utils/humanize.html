@@ -34,5 +34,5 @@
       extantMinimumGutterWidth = text.match(<span class="regexp">/^ +/gm</span>).sort()[<span class="number">0</span>].length
 
     gutter = <span class="string">'            '</span>[<span class="number">0.</span>.gutterWidth].slice(<span class="number">1</span>)
-    regex = <span class="regexp">///^\s{<span class="comment">#{extantMinimumGutterWidth}}///gm</span>
-    text.replace regex, gutter</span></div></div></div></div></body></html>
+    regex = <span class="regexp">///^\s{<span class="subst">#{extantMinimumGutterWidth}</span>}///</span>gm
+    text.replace regex, gutter</div></div></div></div></body></html>

@@ -42,15 +42,14 @@ key in LANGUAGES.</p></div></div><div class="code"><div class="wrapper">  <span 
         language.name = name
 
         <span class="keyword">for</span> matcher <span class="keyword">in</span> language.nameMatchers</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the matcher is a string, we assume that it&#39;s a file extension.
-Stick it in a regex:</p></div></div><div class="code"><div class="wrapper">          matcher = <span class="regexp">///<span class="comment">#{@regexpEscape matcher}$/// if _.isString matcher</span>
+Stick it in a regex:</p></div></div><div class="code"><div class="wrapper">          matcher = <span class="regexp">///<span class="subst">#{<span class="property">@regexpEscape</span> matcher}</span>$///</span> <span class="keyword">if</span> _.isString matcher
 
-          @_languageDetectionCache.push [matcher, language]
+          <span class="property">@_languageDetectionCache</span>.push [matcher, language]
 
     baseName = path.basename filePath
 
-    for pair in @_languageDetectionCache
-      return pair[1] if baseName.match pair[0]
-</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Map a list of file paths to relative target paths by stripping prefixes.</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">mapFiles</span>: <span class="function"><span class="params">(resolveRoot, files, stripPrefixes)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Ensure that we&#39;re dealing with absolute paths across the board.</p></div></div><div class="code"><div class="wrapper">    files = files.map <span class="function"><span class="params">(f)</span> -&gt;</span> path.resolve resolveRoot, f</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And that the strip prefixes all end with a /, avoids absolute target path.</p></div></div><div class="code"><div class="wrapper">    stripPrefixes = stripPrefixes.map <span class="function"><span class="params">(p)</span> -&gt;</span>
+    <span class="keyword">for</span> pair <span class="keyword">in</span> <span class="property">@_languageDetectionCache</span>
+      <span class="keyword">return</span> pair[<span class="number">1</span>] <span class="keyword">if</span> baseName.match pair[<span class="number">0</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Map a list of file paths to relative target paths by stripping prefixes.</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">mapFiles</span>: <span class="function"><span class="params">(resolveRoot, files, stripPrefixes)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Ensure that we&#39;re dealing with absolute paths across the board.</p></div></div><div class="code"><div class="wrapper">    files = files.map <span class="function"><span class="params">(f)</span> -&gt;</span> path.resolve resolveRoot, f</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And that the strip prefixes all end with a /, avoids absolute target path.</p></div></div><div class="code"><div class="wrapper">    stripPrefixes = stripPrefixes.map <span class="function"><span class="params">(p)</span> -&gt;</span>
       path.join <span class="string">"<span class="subst">#{path.resolve resolveRoot, p}</span><span class="subst">#{CompatibilityHelpers.pathSep}</span>"</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Prefixes are stripped in the order of most specific to least
 (# of directories deep)</p></div></div><div class="code"><div class="wrapper">    prefixes = stripPrefixes.sort <span class="function"><span class="params">(a,b)</span> =&gt;</span> <span class="property">@pathDepth</span>(b) - <span class="property">@pathDepth</span>(a)
 
@@ -83,9 +82,9 @@ avoid the perf hit of walking the array to update indices.</p></div></div><div c
       singleLines = <span class="property">@regexpEscape</span>(language.singleLineComment).join <span class="string">'|'</span>
       aSingleLine = <span class="regexp">///
         ^\s*                        <span class="comment"># Start a line and skip all indention.</span>
-        (?:<span class="comment">#{singleLines})          # Match the single-line start but don't capture this group.</span>
+        (?:<span class="subst">#{singleLines}</span>)          <span class="comment"># Match the single-line start but don't capture this group.</span>
         (?:                         <span class="comment"># Also don't capture this group …</span>
-          <span class="comment">#{whitespaceMatch}        # … possibly starting with a whitespace, but</span>
+          <span class="subst">#{whitespaceMatch}</span>        <span class="comment"># … possibly starting with a whitespace, but</span>
           (.*)                      <span class="comment"># … capture anything else in this …</span>
         )?                          <span class="comment"># … optional group …</span>
         $                           <span class="comment"># … up to the EOL.</span>
@@ -117,49 +116,48 @@ combinations like html+php, which are supported by <code>pygmentize</code>.</p><
 either <code>aBlockLine</code>, <code>aBlockEnd</code> or the <code>inBlock</code> catch-all fallback
 handles the real content, in the implementation below.</p></div></div><div class="code"><div class="wrapper">      aBlockStart = <span class="regexp">///
         ^(\s*)                      <span class="comment"># Start a line and capture indention, used to reverse indent catch-all fallback lines.</span>
-        (<span class="comment">#{blockStarts})            # Capture the start-mark, to check the if line- and end-marks correspond, …</span>
-        (<span class="comment">#{blockLines})?            # … possibly followed by a line, captured to check if its corresponding to the start,</span>
-        (?:<span class="comment">#{whitespaceMatch}|$)    # … and finished by whitespace OR the EOL.</span>
+        (<span class="subst">#{blockStarts}</span>)            <span class="comment"># Capture the start-mark, to check the if line- and end-marks correspond, …</span>
+        (<span class="subst">#{blockLines}</span>)?            <span class="comment"># … possibly followed by a line, captured to check if its corresponding to the start,</span>
+        (?:<span class="subst">#{whitespaceMatch}</span>|$)    <span class="comment"># … and finished by whitespace OR the EOL.</span>
       ///</span>
 
       aBlockLine = <span class="regexp">///
         ^\s*                        <span class="comment"># Start a line and skip all indention.</span>
-        (<span class="comment">#{blockLines})             # Capture the line-mark to check if it corresponds to the start-mark, …</span>
-        (<span class="comment">#{whitespaceMatch})        # … possibly followed by whitespace,</span>
+        (<span class="subst">#{blockLines}</span>)             <span class="comment"># Capture the line-mark to check if it corresponds to the start-mark, …</span>
+        (<span class="subst">#{whitespaceMatch}</span>)        <span class="comment"># … possibly followed by whitespace,</span>
         (.*)$                       <span class="comment"># … and collect all up to the line end.</span>
       ///</span>
 
       aBlockEnd = <span class="regexp">///
-        (<span class="comment">#{blockEnds})              # Capture the end-mark to check if it corresponds to the line start,</span>
+        (<span class="subst">#{blockEnds}</span>)              <span class="comment"># Capture the end-mark to check if it corresponds to the line start,</span>
         (.*)?$                      <span class="comment"># … and collect all up to the line end.</span>
       ///</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A special case used to capture empty block-comment lines, like the one
 below this line …</p>
-<p>… and above this line.</p></div></div><div class="code"><div class="wrapper">      aEmptyLine = <span class="regexp">///^\s*(?:<span class="comment">#{blockLines})$///</span>
+<p>… and above this line.</p></div></div><div class="code"><div class="wrapper">      aEmptyLine = <span class="regexp">///^\s*(?:<span class="subst">#{blockLines}</span>)$///</span>
 
-    if language.ignorePrefix?
+    <span class="keyword">if</span> language.ignorePrefix?
       {ignorePrefix} = language
 
-    if language.foldPrefix?
+    <span class="keyword">if</span> language.foldPrefix?
       {foldPrefix} = language
 
-    if (ignorePrefix? or foldPrefix?) and (singleLines? or blockStarts?)
+    <span class="keyword">if</span> (ignorePrefix? <span class="keyword">or</span> foldPrefix?) <span class="keyword">and</span> (singleLines? <span class="keyword">or</span> blockStarts?)
       stripMarks = []
-      stripMarks.push ignorePrefix if ignorePrefix?
-      stripMarks.push foldPrefix if foldPrefix?
-      stripMarks = @regexpEscape(stripMarks).join '|'
-</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A dirty lap-dance performed here …</p></div></div><div class="code"><div class="wrapper">      singleStrip = <span class="regexp">///
+      stripMarks.push ignorePrefix <span class="keyword">if</span> ignorePrefix?
+      stripMarks.push foldPrefix <span class="keyword">if</span> foldPrefix?
+      stripMarks = <span class="property">@regexpEscape</span>(stripMarks).join <span class="string">'|'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>A dirty lap-dance performed here …</p></div></div><div class="code"><div class="wrapper">      singleStrip = <span class="regexp">///
         (                           <span class="comment"># Capture this group:</span>
-          (?:<span class="comment">#{singleLines})        #   The comment marker(s) to keep …</span>
-          <span class="comment">#{whitespaceMatch}        #   … plus whitespace</span>
+          (?:<span class="subst">#{singleLines}</span>)        <span class="comment">#   The comment marker(s) to keep …</span>
+          <span class="subst">#{whitespaceMatch}</span>        <span class="comment">#   … plus whitespace</span>
         )
-        (?:<span class="comment">#{stripMarks})           # The marker(s) to strip from result</span>
+        (?:<span class="subst">#{stripMarks}</span>)           <span class="comment"># The marker(s) to strip from result</span>
       ///</span> <span class="keyword">if</span> singleLines?</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>… and the corresponding gang-bang here. 8-)</p></div></div><div class="code"><div class="wrapper">      blockStrip = <span class="regexp">///
         (                           <span class="comment"># Capture this group:</span>
-          (?:<span class="comment">#{blockStarts})        #   The comment marker(s) to keep …</span>
-          (?:<span class="comment">#{blockLines})?        #   … optionally plus one more mark</span>
-          <span class="comment">#{whitespaceMatch}        #   … plus whitespace</span>
+          (?:<span class="subst">#{blockStarts}</span>)        <span class="comment">#   The comment marker(s) to keep …</span>
+          (?:<span class="subst">#{blockLines}</span>)?        <span class="comment">#   … optionally plus one more mark</span>
+          <span class="subst">#{whitespaceMatch}</span>        <span class="comment">#   … plus whitespace</span>
         )
-        (?:<span class="comment">#{stripMarks})           # The marker(s) to strip from result</span>
+        (?:<span class="subst">#{stripMarks}</span>)           <span class="comment"># The marker(s) to strip from result</span>
       ///</span> <span class="keyword">if</span> blockStarts?
 
     inBlock   = <span class="literal">false</span>
@@ -224,10 +222,9 @@ single-line block-comments simultaneous matching <code>aBlockStart</code>
 and <code>aBlockEnd</code> have a false <code>inBlock</code> flag at this point, are
 included.</p></div></div><div class="code"><div class="wrapper">              <span class="keyword">if</span> <span class="keyword">not</span> <span class="regexp">/^\s*$/</span>.test(blockline) <span class="keyword">or</span> (inBlock <span class="keyword">and</span> <span class="keyword">not</span> aBlockStart.test line)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Strip leading <code>indention</code> from block-comment like the one above
 to align their content with the initial blockmark.</p></div></div><div class="code"><div class="wrapper">                <span class="keyword">if</span> indention? <span class="keyword">and</span> indention <span class="keyword">isnt</span> <span class="string">''</span> <span class="keyword">and</span> <span class="keyword">not</span> aBlockLine.test line
-                  blockline = blockline.replace <span class="regexp">///^<span class="comment">#{indention}///, ''</span>
+                  blockline = blockline.replace <span class="regexp">///^<span class="subst">#{indention}</span>///</span>, <span class="string">''</span>
 
-                currSegment.comments.push blockline
-</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The <code>code</code> may occure immediatly after a block-comment end.</p></div></div><div class="code"><div class="wrapper">              <span class="keyword">if</span> code?
+                currSegment.comments.push blockline</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>The <code>code</code> may occure immediatly after a block-comment end.</p></div></div><div class="code"><div class="wrapper">              <span class="keyword">if</span> code?
                 currSegment.code.push code <span class="keyword">unless</span> inBlock <span class="comment"># fool-proof ?</span>
                 code = <span class="literal">null</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Make sure the next cycle starts fresh.</p></div></div><div class="code"><div class="wrapper">        blockline = <span class="literal">null</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Match that line to the language&#39;s single line comment syntax.
 However, we treat all comments beginning with } as inline code commentary
@@ -328,45 +325,44 @@ appealing in the narrowed single-column-view.  </p>
           tag.section = tagDefinition.section
 
           <span class="keyword">if</span> tagDefinition.valuePrefix?
-            tag.value = tag.value.replace <span class="regexp">///<span class="comment">#{tagDefinition.valuePrefix?}\s+///, ''</span>
+            tag.value = tag.value.replace <span class="regexp">///<span class="subst">#{tagDefinition.valuePrefix?}</span>\s+///</span>, <span class="string">''</span>
 
-          if tagDefinition.parseValue?
+          <span class="keyword">if</span> tagDefinition.parseValue?
             tag.value = tagDefinition.parseValue tag.value
-          else if not /\n/.test tag.value
-            tag.value = tag.value.match(TAG_VALUE_REGEX)[1..].join('')
+          <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="regexp">/\n/</span>.test tag.value
+            tag.value = tag.value.match(TAG_VALUE_REGEX)[<span class="number">1.</span>.].join(<span class="string">''</span>)
 
-          tagSections[tag.section] = [] unless tagSections[tag.section]?
+          tagSections[tag.section] = [] <span class="keyword">unless</span> tagSections[tag.section]?
           tagSections[tag.section].push tag
 
         segment.tags = tags
         segment.tagSections = tagSections
 
-    catch error
-      return callback error
+    <span class="keyword">catch</span> error
+      <span class="keyword">return</span> callback error
 
     callback()
 
-  markdownDocTags: (segments, project, callback) -&gt;
-    try
-      for segment, segmentIndex in segments when segment.tags?
+  <span class="attribute">markdownDocTags</span>: <span class="function"><span class="params">(segments, project, callback)</span> -&gt;</span>
+    <span class="keyword">try</span>
+      <span class="keyword">for</span> segment, segmentIndex <span class="keyword">in</span> segments <span class="keyword">when</span> segment.tags?
 
-        for tag in segment.tags
-          if tag.definition.markdown?
-            if 'string' == typeof tag.definition.markdown
-              tag.markdown = tag.definition.markdown.replace /\{value\}/g, tag.value
-            else
+        <span class="keyword">for</span> tag <span class="keyword">in</span> segment.tags
+          <span class="keyword">if</span> tag.definition.markdown?
+            <span class="keyword">if</span> <span class="string">'string'</span> == <span class="keyword">typeof</span> tag.definition.markdown
+              tag.markdown = tag.definition.markdown.replace <span class="regexp">/\{value\}/g</span>, tag.value
+            <span class="keyword">else</span>
               tag.markdown = tag.definition.markdown(tag.value)
-          else
-            if tag.value.length &gt; 0
-              tag.markdown = "<span class="comment">#{tag.name} #{tag.value}"</span>
-            else
+          <span class="keyword">else</span>
+            <span class="keyword">if</span> tag.value.length &gt; <span class="number">0</span>
+              tag.markdown = <span class="string">"<span class="subst">#{tag.name}</span> <span class="subst">#{tag.value}</span>"</span>
+            <span class="keyword">else</span>
               tag.markdown = tag.name
 
-    catch error
-      return callback error
+    <span class="keyword">catch</span> error
+      <span class="keyword">return</span> callback error
 
-    callback()
-</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments by running their comments through
+    callback()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments by running their comments through
 <a href="https://github.com/chjj/marked">marked</a>.</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">markdownComments</span>: <span class="function"><span class="params">(segments, project, callback)</span> -&gt;</span>
     <span class="keyword">try</span>
       <span class="keyword">for</span> segment, segmentIndex <span class="keyword">in</span> segments

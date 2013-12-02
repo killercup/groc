@@ -54,19 +54,18 @@ so that they can strip from the remainder.</p></div></div><div class="code"><div
         fileInfo =
           <span class="attribute">language</span>:    language
           <span class="attribute">sourcePath</span>:  currentFile
-          <span class="attribute">projectPath</span>: currentFile.replace <span class="regexp">///^<span class="comment">#{Utils.regexpEscape @root + CompatibilityHelpers.pathSep}///, ''</span>
-          targetPath:  if currentFile == indexPath then 'index' else fileMap[currentFile]
-          pageTitle:   if currentFile == indexPath then (options.indexPageTitle || 'index') else fileMap[currentFile]
+          <span class="attribute">projectPath</span>: currentFile.replace <span class="regexp">///^<span class="subst">#{Utils.regexpEscape <span class="property">@root</span> + CompatibilityHelpers.pathSep}</span>///</span>, <span class="string">''</span>
+          <span class="attribute">targetPath</span>:  <span class="keyword">if</span> currentFile == indexPath <span class="keyword">then</span> <span class="string">'index'</span> <span class="keyword">else</span> fileMap[currentFile]
+          <span class="attribute">pageTitle</span>:   <span class="keyword">if</span> currentFile == indexPath <span class="keyword">then</span> (options.indexPageTitle || <span class="string">'index'</span>) <span class="keyword">else</span> fileMap[currentFile]
 
         style.renderFile data, fileInfo, done
 
-    pool.exec (error) =&gt;
-      return callback error if error
+    pool.exec <span class="function"><span class="params">(error)</span> =&gt;</span>
+      <span class="keyword">return</span> callback error <span class="keyword">if</span> error
 
-      style.renderCompleted (error) =&gt;
-        return callback error if error
+      style.renderCompleted <span class="function"><span class="params">(error)</span> =&gt;</span>
+        <span class="keyword">return</span> callback error <span class="keyword">if</span> error
 
-        @log.info ''
-        @log.pass 'Documentation generated'
-        callback()
-</span></div></div></div></div></body></html>
+        <span class="property">@log</span>.info <span class="string">''</span>
+        <span class="property">@log</span>.pass <span class="string">'Documentation generated'</span>
+        callback()</div></div></div></div></body></html>
