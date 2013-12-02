@@ -8,6 +8,14 @@ It is very heavily influenced by [Jeremy Ashkenas](https://github.com/jashkenas)
 [docco](http://jashkenas.github.com/docco/), and is an attempt to further enhance the idea (thus,
 groc can't tout the same quick 'n dirty principles of docco).
 
+## Changes in this fork by [Pascal](https://github.com/killercup)
+
+Increases performance by quite a bit (5s instead of 17s on my machine).
+
+- Switch to [Highlight.js](http://highlightjs.org/)
+- Switch to [marked](https://github.com/chjj/marked)
+
+Also adds better SCSS detection and some CSS fixes.
 
 ## What does it give you?
 
