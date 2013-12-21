@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><title>styles/default/style</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/style"><meta name="groc-project-path" content="lib/styles/default/style.sass"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/style.sass">lib/styles/default/style.sass</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">@<span class="import"><span class="keyword">import</span> "compass"</span>
-@<span class="import"><span class="keyword">import</span> "codestyles"</span>
+@<span class="import"><span class="keyword">import</span> "codestyles-highlight"</span>
+@<span class="import"><span class="keyword">import</span> "codestyles-pygments"</span>
 
 @<span class="import"><span class="keyword">import</span> "compass/reset"</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="configuration">Configuration</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="sizing">Sizing</h3></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
 <li>Margin between segments in two-column mode, padding for code/comments in single-column mode.</li>
@@ -353,7 +354,8 @@ we are relying on for layout.</p></div></div><div class="code"><div class="wrapp
 
 <span class="string">.</span><span class="comment">code</span>
   <span class="string">.</span><span class="comment">wrapper</span>
-    <span class="literal">+</span><span class="comment">codestyles</span>
+    <span class="literal">+</span><span class="comment">codestyles</span><span class="literal">-</span><span class="comment">highlight</span>
+    <span class="literal">+</span><span class="comment">codestyles</span><span class="literal">-</span><span class="comment">pygments</span>
     <span class="literal">+</span><span class="comment">code</span><span class="literal">-</span><span class="comment">font</span>
     <span class="literal">+</span><span class="comment">text</span><span class="literal">-</span><span class="comment">shadow($code</span><span class="literal">-</span><span class="comment">shadow</span><span class="literal">-</span><span class="comment">color</span> <span class="comment">1px</span> <span class="comment">1px</span> <span class="comment">0)</span>
     <span class="comment">color:</span> <span class="comment">$code</span><span class="literal">-</span><span class="comment">foreground</span><span class="literal">-</span><span class="comment">color</span>

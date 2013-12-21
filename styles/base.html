@@ -36,7 +36,12 @@ module.<span class="built_in">exports</span> = <span class="class"><span class="
 
         <span class="property">@renderDocTags</span> segments
 
-        Utils.highlightCode segments, fileInfo.language, <span class="function"><span class="params">(error)</span> =&gt;</span>
+        <span class="keyword">if</span> <span class="property">@project</span>.options.highlighter <span class="keyword">is</span> <span class="string">'pygments'</span>
+          highlightCode = Utils.highlightCodeUsingPygments
+        <span class="keyword">else</span>
+          highlightCode = Utils.highlightCodeUsingHighlightJS
+
+        highlightCode segments, fileInfo.language, <span class="function"><span class="params">(error)</span> =&gt;</span>
           <span class="keyword">if</span> error
             <span class="keyword">if</span> error.failedHighlights
               <span class="keyword">for</span> highlight, i <span class="keyword">in</span> error.failedHighlights

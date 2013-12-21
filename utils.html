@@ -267,7 +267,7 @@ appealing in the narrowed single-column-view.  </p>
     <span class="attribute">constructor</span>: <span class="function"><span class="params">(code=[], comments=[], foldMarker=<span class="string">''</span>)</span> -&gt;</span>
       <span class="property">@code</span>     = code
       <span class="property">@comments</span> = comments
-      <span class="property">@foldMarker</span> = foldMarker</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments using <a href="http://highlightjs.org/">highlight.js</a></p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCode</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span>
+      <span class="property">@foldMarker</span> = foldMarker</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments using <a href="http://highlightjs.org/">highlight.js</a></p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCodeUsingHighlightJS</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span>
     lang = language.highlightJS <span class="keyword">or</span> language.pygmentsLexer <span class="keyword">or</span> <span class="string">''</span>
     doHighlight = <span class="keyword">do</span><span class="function"> -&gt;</span>
       <span class="keyword">if</span> (lang <span class="keyword">is</span> <span class="string">'AUTO'</span>) <span class="keyword">or</span> (lang <span class="keyword">is</span> <span class="string">''</span>)
@@ -281,7 +281,68 @@ appealing in the narrowed single-column-view.  </p>
       <span class="keyword">else</span>
         segment.highlightedCode = <span class="string">""</span>
 
-    callback()
+    callback()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annotate an array of segments by running their code through <a href="http://pygments.org/">Pygments</a>.</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCodeUsingPygments</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Don&#39;t bother spawning pygments if we have nothing to highlight</p></div></div><div class="code"><div class="wrapper">    numCodeLines = segments.reduce <span class="function"><span class="params">( (c,s) -&gt; c + s.code.length )</span>, 0
+    <span class="title">if</span> <span class="title">numCodeLines</span> == 0
+      <span class="title">for</span> <span class="title">segment</span> <span class="title">in</span> <span class="title">segments</span>
+        <span class="title">segment</span>.<span class="title">highlightedCode</span> = ''
+
+      <span class="title">return</span> <span class="title">callback</span><span class="params">()</span>
+
+    <span class="title">errListener</span> = <span class="params">(error)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This appears to only occur when pygmentize is missing:</p></div></div><div class="code"><div class="wrapper">      Logger.error <span class="string">"Unable to find 'pygmentize' on your PATH.  Please install pygments."</span>
+      Logger.info <span class="string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Lack of pygments is a one time setup task, we don&#39;t feel bad about killing the process
+off until the user does so.  It&#39;s a hard requirement.</p></div></div><div class="code"><div class="wrapper">      process.exit <span class="number">1</span>
+
+    pygmentize = childProcess.spawn <span class="string">'pygmentize'</span>, [
+      <span class="string">'-l'</span>, language.pygmentsLexer
+      <span class="string">'-f'</span>, <span class="string">'html'</span>
+      <span class="string">'-O'</span>, <span class="string">'encoding=utf-8,tabsize=2'</span>
+    ]
+    pygmentize.stderr.addListener <span class="string">'data'</span>, <span class="function"><span class="params">(data)</span>  -&gt;</span> callback data.toString()
+    pygmentize.stdin.addListener <span class="string">'error'</span>, errListener
+    pygmentize.<span class="literal">on</span> <span class="string">'error'</span>, errListener</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We&#39;ll just split the output at the end.  pygmentize doesn&#39;t stream its output, and a given
+source file is small enough that it shouldn&#39;t matter.</p></div></div><div class="code"><div class="wrapper">    result = <span class="string">''</span>
+    pygmentize.stdout.addListener <span class="string">'data'</span>, <span class="function"><span class="params">(data)</span> =&gt;</span>
+      result += data.toString()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>v0.8 changed exit/close event semantics.</p></div></div><div class="code"><div class="wrapper">    match = process.version.match <span class="regexp">/v(\d+\.\d+)/</span>
+    closeEvent = <span class="keyword">if</span> parseFloat(match[<span class="number">1</span>]) &lt; <span class="number">0.8</span> <span class="keyword">then</span> <span class="string">'exit'</span> <span class="keyword">else</span> <span class="string">'close'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We can&#39;t include either of the following words ANYWHERE directly adjacent to each other
+Otherwise, our regex (~10 lines below) will split on them, and the number of code blocks
+and comment blocks will not be equal.</p></div></div><div class="code"><div class="wrapper">    seg = <span class="string">'SEGMENT'</span>
+    div = <span class="string">'DIVIDER'</span>
+
+    pygmentize.addListener closeEvent, <span class="function"><span class="params">(args...)</span> =&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>pygments spits it out wrapped in <code>&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;...&lt;/pre&gt;&lt;/div&gt;</code>.  We want to
+manage the styling ourselves, so remove that.</p></div></div><div class="code"><div class="wrapper">      result = result.replace(<span class="string">'&lt;div class="highlight"&gt;&lt;pre&gt;'</span>, <span class="string">''</span>).replace(<span class="string">'&lt;/pre&gt;&lt;/div&gt;'</span>, <span class="string">''</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Extract our segments from the pygmentized source.</p></div></div><div class="code"><div class="wrapper">      highlighted = <span class="string">"\n<span class="subst">#{result}</span>\n"</span>.split <span class="regexp">///.*&lt;span.*<span class="subst">#{seg}</span>\s<span class="subst">#{div}</span>.*&lt;\/span&gt;.*///</span>
+
+      <span class="keyword">if</span> highlighted.length != segments.length
+        console.log(result)
+
+        error = <span class="keyword">new</span> Error CompatibilityHelpers.format <span class="string">'pygmentize rendered %d of %d segments; expected to be equal'</span>,
+          highlighted.length, segments.length
+
+        error.pygmentsOutput   = result
+        error.failedHighlights = highlighted
+        <span class="keyword">return</span> callback error</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Attach highlighted source to the highlightedCode property of a Segment.</p></div></div><div class="code"><div class="wrapper">      <span class="keyword">for</span> segment, i <span class="keyword">in</span> segments
+        segment.highlightedCode = highlighted[i]
+
+      callback()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Rather than spawning pygments for each segment, we stream it all in, separated by &#39;magic&#39;
+comments so that we can split the highlighted source back into segments.
+To further complicate things, pygments doesn&#39;t let us cheat with indentation-aware languages:
+We have to match the indentation of the line following the divider comment.</p></div></div><div class="code"><div class="wrapper">    mergedCode = <span class="string">''</span>
+    <span class="keyword">for</span> segment, i <span class="keyword">in</span> segments
+      segmentCode = segment.code.join <span class="string">'\n'</span>
+
+      <span class="keyword">if</span> i &gt; <span class="number">0</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Double negative: match characters that are spaces but not newlines</p></div></div><div class="code"><div class="wrapper">        indentation = segmentCode.match(<span class="regexp">/^[^\S\n]+/</span>)?[<span class="number">0</span>] || <span class="string">''</span>
+        <span class="keyword">if</span> language.singleLineComment?
+          mergedCode += <span class="string">"\n<span class="subst">#{indentation}</span><span class="subst">#{language.singleLineComment[<span class="number">0</span>]}</span> <span class="subst">#{seg}</span> <span class="subst">#{div}</span>\n"</span>
+        <span class="keyword">else</span>
+          mlc = language.multiLineComment
+          mergedCode += <span class="string">"\n<span class="subst">#{indentation}</span><span class="subst">#{mlc[<span class="number">0</span>]}</span> <span class="subst">#{seg}</span> <span class="subst">#{div}</span> <span class="subst">#{mlc[<span class="number">2</span>]}</span>\n"</span>
+
+      mergedCode += segmentCode
+
+    pygmentize.stdin.write mergedCode
+    pygmentize.stdin.end()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>default</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">highlightCode</span>: <span class="function"><span class="params">(segments, language, callback)</span> -&gt;</span>
+    Logger.warn <span class="string">"Usage of highlightCode is deprecated. Specify highlighter"</span>+
+      <span class="string">" instead. (Using highlight.js as default.)"</span>
+    highlightCodeUsingHighlightJS(segments, language, callback)
 
   <span class="attribute">parseDocTags</span>: <span class="function"><span class="params">(segments, project, callback)</span> -&gt;</span>
     TAG_REGEX = <span class="regexp">/(?:^|\s)@(\w+)(?:\s+(.*))?/</span>
