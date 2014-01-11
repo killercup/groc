@@ -1,132 +1,133 @@
-<!DOCTYPE html><html lang="en"><head><title>styles/default/behavior</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/behavior"><meta name="groc-project-path" content="lib/styles/default/behavior.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/behavior.coffee">lib/styles/default/behavior.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">tableOfContents = &lt;%= JSON.stringify(tableOfContents) %&gt;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h1 id="page-behavior">Page Behavior</h1></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="table-of-contents">Table of Contents</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Global jQuery references to navigation components we care about.</p></div></div><div class="code"><div class="wrapper">nav$ = <span class="literal">null</span>
-toc$ = <span class="literal">null</span>
+<!DOCTYPE html><html lang="en"><head><title>styles/default/behavior</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/behavior"><meta name="groc-project-path" content="lib/styles/default/behavior.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/behavior.coffee">lib/styles/default/behavior.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">tableOfContents = &lt;%= JSON.stringify(tableOfContents) %&gt;</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h1 id="page-behavior">Page Behavior</h1></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="table-of-contents">Table of Contents</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Global jQuery references to navigation components we care about.</p></div></div><div class="code"><div class="wrapper">nav$ = <span class="hljs-literal">null</span>
+toc$ = <span class="hljs-literal">null</span>
 
-<span class="function"><span class="title">setTableOfContentsActive</span> = <span class="params">(active)</span> -&gt;</span>
-  html$ = $(<span class="string">'html'</span>)
+<span class="hljs-function"><span class="hljs-title">setTableOfContentsActive</span> = <span class="hljs-params">(active)</span> -&gt;</span>
+  html$ = $(<span class="hljs-string">'html'</span>)
 
-  <span class="keyword">if</span> active
-    nav$.addClass  <span class="string">'active'</span>
-    html$.addClass <span class="string">'popped'</span>
-  <span class="keyword">else</span>
-    nav$.removeClass  <span class="string">'active'</span>
-    html$.removeClass <span class="string">'popped'</span>
+  <span class="hljs-keyword">if</span> active
+    nav$.addClass  <span class="hljs-string">'active'</span>
+    html$.addClass <span class="hljs-string">'popped'</span>
+  <span class="hljs-keyword">else</span>
+    nav$.removeClass  <span class="hljs-string">'active'</span>
+    html$.removeClass <span class="hljs-string">'popped'</span>
 
-<span class="function"><span class="title">toggleTableOfContents</span> = -&gt;</span>
-  setTableOfContentsActive <span class="keyword">not</span> nav$.hasClass <span class="string">'active'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="node-navigation">Node Navigation</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">currentNode$ = <span class="literal">null</span>
+<span class="hljs-function"><span class="hljs-title">toggleTableOfContents</span> = -&gt;</span>
+  setTableOfContentsActive <span class="hljs-keyword">not</span> nav$.hasClass <span class="hljs-string">'active'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="node-navigation">Node Navigation</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">currentNode$ = <span class="hljs-literal">null</span>
 
-<span class="function"><span class="title">focusCurrentNode</span> = -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the first child&#39;s offset top rather than toc$.offset().top because there may be borders
-or other stylistic tweaks that further offset the scrollTop.</p></div></div><div class="code"><div class="wrapper">  currentNodeTop    = currentNode$.offset().top - toc$.children(<span class="string">':visible'</span>).first().offset().top
-  currentNodeBottom = currentNodeTop + currentNode$.children(<span class="string">'.label'</span>).height()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the current node is partially or fully above the top of the viewport, scroll it into view.</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">if</span> currentNodeTop &lt; toc$.scrollTop()
-    toc$.scrollTop currentNodeTop</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Similarly, if we&#39;re below the bottom of the viewport, scroll up enough to make it visible.</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">if</span> currentNodeBottom &gt; toc$.scrollTop() + toc$.height()
+<span class="hljs-function"><span class="hljs-title">focusCurrentNode</span> = -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the first child's offset top rather than toc$.offset().top because there may be borders
+or other stylistic tweaks that further offset the scrollTop.</p></div></div><div class="code"><div class="wrapper">  currentNodeTop    = currentNode$.offset().top - toc$.children(<span class="hljs-string">':visible'</span>).first().offset().top
+  currentNodeBottom = currentNodeTop + currentNode$.children(<span class="hljs-string">'.label'</span>).height()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If the current node is partially or fully above the top of the viewport, scroll it into view.</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> currentNodeTop &lt; toc$.scrollTop()
+    toc$.scrollTop currentNodeTop</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Similarly, if we're below the bottom of the viewport, scroll up enough to make it visible.</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">if</span> currentNodeBottom &gt; toc$.scrollTop() + toc$.height()
     toc$.scrollTop currentNodeBottom - toc$.height()
 
-<span class="function"><span class="title">setCurrentNodeExpanded</span> = <span class="params">(expanded)</span> -&gt;</span>
-  <span class="keyword">if</span> expanded
-    currentNode$.addClass <span class="string">'expanded'</span>
-  <span class="keyword">else</span>
-    <span class="keyword">if</span> currentNode$.hasClass <span class="string">'expanded'</span>
-      currentNode$.removeClass <span class="string">'expanded'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We collapse up to the node&#39;s parent if the current node is already collapsed.  This allows
-a user to quickly spam left to move up the tree.</p></div></div><div class="code"><div class="wrapper">    <span class="keyword">else</span>
-      parents$ = currentNode$.parents(<span class="string">'li'</span>)
-      selectNode parents$.first() <span class="keyword">if</span> parents$.length &gt; <span class="number">0</span>
+<span class="hljs-function"><span class="hljs-title">setCurrentNodeExpanded</span> = <span class="hljs-params">(expanded)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> expanded
+    currentNode$.addClass <span class="hljs-string">'expanded'</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">if</span> currentNode$.hasClass <span class="hljs-string">'expanded'</span>
+      currentNode$.removeClass <span class="hljs-string">'expanded'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We collapse up to the node's parent if the current node is already collapsed.  This allows
+a user to quickly spam left to move up the tree.</p></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">else</span>
+      parents$ = currentNode$.parents(<span class="hljs-string">'li'</span>)
+      selectNode parents$.first() <span class="hljs-keyword">if</span> parents$.length &gt; <span class="hljs-number">0</span>
 
   focusCurrentNode()
 
-<span class="function"><span class="title">selectNode</span> = <span class="params">(newNode$)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Remove first, in case it&#39;s the same node</p></div></div><div class="code"><div class="wrapper">  currentNode$.removeClass <span class="string">'selected'</span>
-  newNode$.addClass <span class="string">'selected'</span>
+<span class="hljs-function"><span class="hljs-title">selectNode</span> = <span class="hljs-params">(newNode$)</span> -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Remove first, in case it's the same node</p></div></div><div class="code"><div class="wrapper">  currentNode$.removeClass <span class="hljs-string">'selected'</span>
+  newNode$.addClass <span class="hljs-string">'selected'</span>
 
   currentNode$ = newNode$
   focusCurrentNode()
 
-<span class="function"><span class="title">selectNodeByDocumentPath</span> = <span class="params">(documentPath, headerSlug=<span class="literal">null</span>)</span> -&gt;</span>
+<span class="hljs-function"><span class="hljs-title">selectNodeByDocumentPath</span> = <span class="hljs-params">(documentPath, headerSlug=<span class="hljs-literal">null</span>)</span> -&gt;</span>
   currentNode$ = fileMap[documentPath]
-  <span class="keyword">if</span> headerSlug
-    <span class="keyword">for</span> link <span class="keyword">in</span> currentNode$.find <span class="string">'.outline a'</span>
-      urlChunks = $(link).attr(<span class="string">'href'</span>).split <span class="string">'#'</span>
+  <span class="hljs-keyword">if</span> headerSlug
+    <span class="hljs-keyword">for</span> link <span class="hljs-keyword">in</span> currentNode$.find <span class="hljs-string">'.outline a'</span>
+      urlChunks = $(link).attr(<span class="hljs-string">'href'</span>).split <span class="hljs-string">'#'</span>
 
-      <span class="keyword">if</span> urlChunks[<span class="number">1</span>] == headerSlug
-        currentNode$ = $(link).parents(<span class="string">'li'</span>).first()
-        <span class="keyword">break</span>
+      <span class="hljs-keyword">if</span> urlChunks[<span class="hljs-number">1</span>] == headerSlug
+        currentNode$ = $(link).parents(<span class="hljs-string">'li'</span>).first()
+        <span class="hljs-keyword">break</span>
 
-  currentNode$.addClass <span class="string">'selected expanded'</span>
-  currentNode$.parents(<span class="string">'li'</span>).addClass <span class="string">'expanded'</span>
+  currentNode$.addClass <span class="hljs-string">'selected expanded'</span>
+  currentNode$.parents(<span class="hljs-string">'li'</span>).addClass <span class="hljs-string">'expanded'</span>
 
   focusCurrentNode()
 
-<span class="function"><span class="title">moveCurrentNode</span> = <span class="params">(up)</span> -&gt;</span>
-  visibleNodes$ = toc$.find <span class="string">'li:visible:not(.filtered)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Fall back to the first node if anything goes wrong</p></div></div><div class="code"><div class="wrapper">  newIndex = <span class="number">0</span>
-  <span class="keyword">for</span> node, i <span class="keyword">in</span> visibleNodes$
-    <span class="keyword">if</span> node == currentNode$[<span class="number">0</span>]
-      newIndex = <span class="keyword">if</span> up <span class="keyword">then</span> i - <span class="number">1</span> <span class="keyword">else</span> i + <span class="number">1</span>
-      newIndex = <span class="number">0</span> <span class="keyword">if</span> newIndex &lt; <span class="number">0</span>
-      newIndex = visibleNodes$.length - <span class="number">1</span> <span class="keyword">if</span> newIndex &gt; visibleNodes$.length - <span class="number">1</span>
-      <span class="keyword">break</span>
+<span class="hljs-function"><span class="hljs-title">moveCurrentNode</span> = <span class="hljs-params">(up)</span> -&gt;</span>
+  visibleNodes$ = toc$.find <span class="hljs-string">'li:visible:not(.filtered)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Fall back to the first node if anything goes wrong</p></div></div><div class="code"><div class="wrapper">  newIndex = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">for</span> node, i <span class="hljs-keyword">in</span> visibleNodes$
+    <span class="hljs-keyword">if</span> node == currentNode$[<span class="hljs-number">0</span>]
+      newIndex = <span class="hljs-keyword">if</span> up <span class="hljs-keyword">then</span> i - <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> i + <span class="hljs-number">1</span>
+      newIndex = <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> newIndex &lt; <span class="hljs-number">0</span>
+      newIndex = visibleNodes$.length - <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> newIndex &gt; visibleNodes$.length - <span class="hljs-number">1</span>
+      <span class="hljs-keyword">break</span>
 
   selectNode $(visibleNodes$[newIndex])
 
-<span class="function"><span class="title">visitCurrentNode</span> = -&gt;</span>
-  labelLink$ = currentNode$.children(<span class="string">'a.label'</span>)
-  window.location = labelLink$.attr <span class="string">'href'</span> <span class="keyword">if</span> labelLink$.length &gt; <span class="number">0</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="node-search">Node Search</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Only show a filter if it matches this many or fewer nodes</p></div></div><div class="code"><div class="wrapper">MAX_FILTER_SIZE = <span class="number">10</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>An array of of [search string, node, label text] triples</p></div></div><div class="code"><div class="wrapper">searchableNodes = []
-<span class="function"><span class="title">appendSearchNode</span> = <span class="params">(node$)</span> -&gt;</span>
-  text$ = node$.find(<span class="string">'&gt; .label .text'</span>)
+<span class="hljs-function"><span class="hljs-title">visitCurrentNode</span> = -&gt;</span>
+  labelLink$ = currentNode$.children(<span class="hljs-string">'a.label'</span>)
+  <span class="hljs-built_in">window</span>.location = labelLink$.attr <span class="hljs-string">'href'</span> <span class="hljs-keyword">if</span> labelLink$.length &gt; <span class="hljs-number">0</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="node-search">Node Search</h2></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Only show a filter if it matches this many or fewer nodes</p></div></div><div class="code"><div class="wrapper">MAX_FILTER_SIZE = <span class="hljs-number">10</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>An array of of [search string, node, label text] triples</p></div></div><div class="code"><div class="wrapper">searchableNodes = []
+<span class="hljs-function"><span class="hljs-title">appendSearchNode</span> = <span class="hljs-params">(node$)</span> -&gt;</span>
+  text$ = node$.find(<span class="hljs-string">'&gt; .label .text'</span>)
   searchableNodes.push [text$.text().toLowerCase(), node$, text$]
 
-currentQuery = <span class="string">''</span>
-<span class="function"><span class="title">searchNodes</span> = <span class="params">(queryString)</span> -&gt;</span>
-  queryString = queryString.toLowerCase().replace(<span class="regexp">/\s+/</span>, <span class="string">''</span>)
-  <span class="keyword">return</span> <span class="keyword">if</span> queryString == currentQuery
+currentQuery = <span class="hljs-string">''</span>
+<span class="hljs-function"><span class="hljs-title">searchNodes</span> = <span class="hljs-params">(queryString)</span> -&gt;</span>
+  queryString = queryString.toLowerCase().replace(<span class="hljs-regexp">/\s+/</span>, <span class="hljs-string">''</span>)
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> queryString == currentQuery
   currentQuery = queryString
 
-  <span class="keyword">return</span> clearFilter() <span class="keyword">if</span> queryString == <span class="string">''</span>
+  <span class="hljs-keyword">return</span> clearFilter() <span class="hljs-keyword">if</span> queryString == <span class="hljs-string">''</span>
 
-  matcher  = <span class="keyword">new</span> RegExp (c.replace <span class="regexp">/[-[\]{}()*+?.,\\^$|#\s]/</span>, <span class="string">"\\$&amp;"</span> <span class="keyword">for</span> c <span class="keyword">in</span> queryString).join <span class="string">'.*'</span>
+  matcher  = <span class="hljs-keyword">new</span> RegExp (c.replace <span class="hljs-regexp">/[-[\]{}()*+?.,\\^$|#\s]/</span>, <span class="hljs-string">"\\$&amp;"</span> <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> queryString).join <span class="hljs-string">'.*'</span>
   matched  = []
   filtered = []
 
-  <span class="keyword">for</span> nodeInfo <span class="keyword">in</span> searchableNodes
-    <span class="keyword">if</span> matcher.test nodeInfo[<span class="number">0</span>] <span class="keyword">then</span> matched.push nodeInfo <span class="keyword">else</span> filtered.push nodeInfo
+  <span class="hljs-keyword">for</span> nodeInfo <span class="hljs-keyword">in</span> searchableNodes
+    <span class="hljs-keyword">if</span> matcher.test nodeInfo[<span class="hljs-number">0</span>] <span class="hljs-keyword">then</span> matched.push nodeInfo <span class="hljs-keyword">else</span> filtered.push nodeInfo
 
-  <span class="keyword">return</span> clearFilter() <span class="keyword">if</span> matched.length &gt; MAX_FILTER_SIZE
+  <span class="hljs-keyword">return</span> clearFilter() <span class="hljs-keyword">if</span> matched.length &gt; MAX_FILTER_SIZE
 
-  nav$.addClass <span class="string">'searching'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Update the DOM</p></div></div><div class="code"><div class="wrapper">  <span class="keyword">for</span> nodeInfo <span class="keyword">in</span> filtered
-    nodeInfo[<span class="number">1</span>].removeClass <span class="string">'matched-child'</span>
-    nodeInfo[<span class="number">1</span>].addClass <span class="string">'filtered'</span>
-    clearHighlight nodeInfo[<span class="number">2</span>]
+  nav$.addClass <span class="hljs-string">'searching'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Update the DOM</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">for</span> nodeInfo <span class="hljs-keyword">in</span> filtered
+    nodeInfo[<span class="hljs-number">1</span>].removeClass <span class="hljs-string">'matched-child'</span>
+    nodeInfo[<span class="hljs-number">1</span>].addClass <span class="hljs-string">'filtered'</span>
+    clearHighlight nodeInfo[<span class="hljs-number">2</span>]
 
-  <span class="keyword">for</span> nodeInfo <span class="keyword">in</span> matched
-    nodeInfo[<span class="number">1</span>].removeClass <span class="string">'filtered matched-child'</span>
-    nodeInfo[<span class="number">1</span>].addClass <span class="string">'matched'</span>
+  <span class="hljs-keyword">for</span> nodeInfo <span class="hljs-keyword">in</span> matched
+    nodeInfo[<span class="hljs-number">1</span>].removeClass <span class="hljs-string">'filtered matched-child'</span>
+    nodeInfo[<span class="hljs-number">1</span>].addClass <span class="hljs-string">'matched'</span>
 
-    highlightMatch nodeInfo[<span class="number">2</span>], queryString</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Filter out our immediate parent</p></div></div><div class="code"><div class="wrapper">    $(p).addClass <span class="string">'matched-child'</span> <span class="keyword">for</span> p <span class="keyword">in</span> nodeInfo[<span class="number">1</span>].parents <span class="string">'li'</span>
+    highlightMatch nodeInfo[<span class="hljs-number">2</span>], queryString</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Filter out our immediate parent</p></div></div><div class="code"><div class="wrapper">    $(p).addClass <span class="hljs-string">'matched-child'</span> <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> nodeInfo[<span class="hljs-number">1</span>].parents <span class="hljs-string">'li'</span>
 
-<span class="function"><span class="title">clearFilter</span> = -&gt;</span>
-  nav$.removeClass <span class="string">'searching'</span>
-  currentQuery = <span class="string">''</span>
+<span class="hljs-function"><span class="hljs-title">clearFilter</span> = -&gt;</span>
+  nav$.removeClass <span class="hljs-string">'searching'</span>
+  currentQuery = <span class="hljs-string">''</span>
 
-  <span class="keyword">for</span> nodeInfo <span class="keyword">in</span> searchableNodes
-    nodeInfo[<span class="number">1</span>].removeClass <span class="string">'filtered matched-child'</span>
-    clearHighlight nodeInfo[<span class="number">2</span>]
+  <span class="hljs-keyword">for</span> nodeInfo <span class="hljs-keyword">in</span> searchableNodes
+    nodeInfo[<span class="hljs-number">1</span>].removeClass <span class="hljs-string">'filtered matched-child'</span>
+    clearHighlight nodeInfo[<span class="hljs-number">2</span>]
 
-<span class="function"><span class="title">highlightMatch</span> = <span class="params">(text$, queryString)</span> -&gt;</span>
+<span class="hljs-function"><span class="hljs-title">highlightMatch</span> = <span class="hljs-params">(text$, queryString)</span> -&gt;</span>
   nodeText  = text$.text()
   lowerText = nodeText.toLowerCase()
 
-  markedText    = <span class="string">''</span>
-  furthestIndex = <span class="number">0</span>
+  markedText    = <span class="hljs-string">''</span>
+  furthestIndex = <span class="hljs-number">0</span>
 
-  <span class="keyword">for</span> char <span class="keyword">in</span> queryString
+  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> queryString
     foundIndex    = lowerText.indexOf char, furthestIndex
-    markedText   += nodeText[furthestIndex...foundIndex] + <span class="string">"&lt;em&gt;<span class="subst">#{nodeText[foundIndex]}</span>&lt;/em&gt;"</span>
-    furthestIndex = foundIndex + <span class="number">1</span>
+    markedText   += nodeText[furthestIndex...foundIndex] + <span class="hljs-string">"&lt;em&gt;<span class="hljs-subst">#{nodeText[foundIndex]}</span>&lt;/em&gt;"</span>
+    furthestIndex = foundIndex + <span class="hljs-number">1</span>
 
   text$.html markedText + nodeText[furthestIndex...]
 
-<span class="function"><span class="title">clearHighlight</span> = <span class="params">(text$)</span> -&gt;</span>
-  text$.text text$.text() <span class="comment"># Strip all tags</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="dom-construction">DOM Construction</h2>
-<p>Navigation and the table of contents are entirely managed by us.</p></div></div><div class="code"><div class="wrapper">fileMap = {} <span class="comment"># A map of targetPath -&gt; DOM node</span>
+<span class="hljs-function"><span class="hljs-title">clearHighlight</span> = <span class="hljs-params">(text$)</span> -&gt;</span>
+  text$.text text$.text() <span class="hljs-comment"># Strip all tags</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="dom-construction">DOM Construction</h2>
 
-<span class="function"><span class="title">buildNav</span> = <span class="params">(metaInfo)</span> -&gt;</span>
-  nav$ = $(<span class="string">"""
+<p>Navigation and the table of contents are entirely managed by us.</p></div></div><div class="code"><div class="wrapper">fileMap = {} <span class="hljs-comment"># A map of targetPath -&gt; DOM node</span>
+
+<span class="hljs-function"><span class="hljs-title">buildNav</span> = <span class="hljs-params">(metaInfo)</span> -&gt;</span>
+  nav$ = $(<span class="hljs-string">"""
     &lt;nav&gt;
       &lt;ul class="tools"&gt;
         &lt;li class="toggle"&gt;Table of Contents&lt;/li&gt;
@@ -137,111 +138,111 @@ currentQuery = <span class="string">''</span>
       &lt;ol class="toc"/&gt;
       &lt;/div&gt;
     &lt;/nav&gt;
-  """</span>).appendTo $(<span class="string">'body'</span>)
-  toc$ = nav$.find <span class="string">'.toc'</span>
+  """</span>).appendTo $(<span class="hljs-string">'body'</span>)
+  toc$ = nav$.find <span class="hljs-string">'.toc'</span>
 
-  <span class="keyword">if</span> metaInfo.githubURL</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Special case the index to go to the project root</p></div></div><div class="code"><div class="wrapper">    <span class="keyword">if</span> metaInfo.documentPath == <span class="string">'index'</span>
+  <span class="hljs-keyword">if</span> metaInfo.githubURL</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Special case the index to go to the project root</p></div></div><div class="code"><div class="wrapper">    <span class="hljs-keyword">if</span> metaInfo.documentPath == <span class="hljs-string">'index'</span>
       sourceURL = metaInfo.githubURL
-    <span class="keyword">else</span>
-      sourceURL = <span class="string">"<span class="subst">#{metaInfo.githubURL}</span>/blob/master/<span class="subst">#{metaInfo.projectPath}</span>"</span>
+    <span class="hljs-keyword">else</span>
+      sourceURL = <span class="hljs-string">"<span class="hljs-subst">#{metaInfo.githubURL}</span>/blob/master/<span class="hljs-subst">#{metaInfo.projectPath}</span>"</span>
 
-    nav$.find(<span class="string">'.tools'</span>).prepend <span class="string">"""
+    nav$.find(<span class="hljs-string">'.tools'</span>).prepend <span class="hljs-string">"""
       &lt;li class="github"&gt;
-        &lt;a href="<span class="subst">#{sourceURL}</span>" title="View source on GitHub"&gt;
+        &lt;a href="<span class="hljs-subst">#{sourceURL}</span>" title="View source on GitHub"&gt;
           View source on GitHub
         &lt;/a&gt;
       &lt;/li&gt;
     """</span>
 
-  <span class="keyword">for</span> node <span class="keyword">in</span> tableOfContents
+  <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> tableOfContents
     toc$.append buildTOCNode node, metaInfo
 
   nav$
 
-<span class="function"><span class="title">buildTOCNode</span> = <span class="params">(node, metaInfo)</span> -&gt;</span>
-  node$ = $(<span class="string">"""&lt;li class="<span class="subst">#{node.type}</span>"/&gt;"""</span>)
+<span class="hljs-function"><span class="hljs-title">buildTOCNode</span> = <span class="hljs-params">(node, metaInfo)</span> -&gt;</span>
+  node$ = $(<span class="hljs-string">"""&lt;li class="<span class="hljs-subst">#{node.type}</span>"/&gt;"""</span>)
 
-  <span class="comment">#} just to clarify: we use it in the `clickLabel`-method below, but can</span>
-  <span class="comment">#} reference the first time after initializing it a few more lines below</span>
-  discloser = <span class="literal">null</span>
+  <span class="hljs-comment">#} just to clarify: we use it in the `clickLabel`-method below, but can</span>
+  <span class="hljs-comment">#} reference the first time after initializing it a few more lines below</span>
+  discloser = <span class="hljs-literal">null</span>
 
-  <span class="keyword">switch</span> node.type
-    <span class="keyword">when</span> <span class="string">'file'</span>
-      <span class="comment">#} Single line to avoid extra whitespace</span>
-      node$.append <span class="string">"""&lt;a class="label" href="<span class="subst">#{metaInfo.relativeRoot}</span><span class="subst">#{node.data.targetPath}</span>.html" title="<span class="subst">#{node.data.projectPath}</span>"&gt;&lt;span class="text"&gt;<span class="subst">#{node.data.title}</span>&lt;/span&gt;&lt;/a&gt;"""</span>
-      <span class="function"><span class="title">clickLabel</span> = <span class="params">(evt)</span> -&gt;</span>
-        <span class="keyword">if</span> evt.target <span class="keyword">is</span> discloser
-          node$.toggleClass <span class="string">'expanded'</span>
+  <span class="hljs-keyword">switch</span> node.type
+    <span class="hljs-keyword">when</span> <span class="hljs-string">'file'</span>
+      <span class="hljs-comment">#} Single line to avoid extra whitespace</span>
+      node$.append <span class="hljs-string">"""&lt;a class="label" href="<span class="hljs-subst">#{metaInfo.relativeRoot}</span><span class="hljs-subst">#{node.data.targetPath}</span>.html" title="<span class="hljs-subst">#{node.data.projectPath}</span>"&gt;&lt;span class="text"&gt;<span class="hljs-subst">#{node.data.title}</span>&lt;/span&gt;&lt;/a&gt;"""</span>
+      <span class="hljs-function"><span class="hljs-title">clickLabel</span> = <span class="hljs-params">(evt)</span> -&gt;</span>
+        <span class="hljs-keyword">if</span> evt.target <span class="hljs-keyword">is</span> discloser
+          node$.toggleClass <span class="hljs-string">'expanded'</span>
           evt.preventDefault()
-          <span class="keyword">return</span> <span class="literal">false</span>
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
         selectNode node$
 
-    <span class="keyword">when</span> <span class="string">'folder'</span>
-      node$.append <span class="string">"""&lt;a class="label" href="#"&gt;&lt;span class="text"&gt;<span class="subst">#{node.data.title}</span>&lt;/span&gt;&lt;/a&gt;"""</span>
-      <span class="function"><span class="title">clickLabel</span> = <span class="params">(evt)</span> -&gt;</span>
+    <span class="hljs-keyword">when</span> <span class="hljs-string">'folder'</span>
+      node$.append <span class="hljs-string">"""&lt;a class="label" href="#"&gt;&lt;span class="text"&gt;<span class="hljs-subst">#{node.data.title}</span>&lt;/span&gt;&lt;/a&gt;"""</span>
+      <span class="hljs-function"><span class="hljs-title">clickLabel</span> = <span class="hljs-params">(evt)</span> -&gt;</span>
         selectNode node$
-        node$.toggleClass <span class="string">'expanded'</span>
+        node$.toggleClass <span class="hljs-string">'expanded'</span>
         evt.preventDefault()
-        <span class="keyword">return</span> <span class="literal">false</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
 
-  <span class="keyword">if</span> node.children?.length &gt; <span class="number">0</span>
-    children$ = $(<span class="string">'&lt;ol class="children"/&gt;'</span>)
-    children$.append buildTOCNode c, metaInfo <span class="keyword">for</span> c <span class="keyword">in</span> node.children
+  <span class="hljs-keyword">if</span> node.children?.length &gt; <span class="hljs-number">0</span>
+    children$ = $(<span class="hljs-string">'&lt;ol class="children"/&gt;'</span>)
+    children$.append buildTOCNode c, metaInfo <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> node.children
 
     node$.append children$
 
-  label$ = node$.find(<span class="string">'&gt; .label'</span>)
+  label$ = node$.find(<span class="hljs-string">'&gt; .label'</span>)
   label$.click clickLabel
 
-  discloser$ = $(<span class="string">'&lt;span class="discloser"/&gt;'</span>).prependTo label$
-  discloser$.addClass <span class="string">'placeholder'</span> <span class="keyword">unless</span> node.children?.length &gt; <span class="number">0</span>
-  discloser = discloser$.get(<span class="number">0</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Persist our references to the node</p></div></div><div class="code"><div class="wrapper">  fileMap[node.data.targetPath] = node$ <span class="keyword">if</span> node.type == <span class="string">'file'</span>
+  discloser$ = $(<span class="hljs-string">'&lt;span class="discloser"/&gt;'</span>).prependTo label$
+  discloser$.addClass <span class="hljs-string">'placeholder'</span> <span class="hljs-keyword">unless</span> node.children?.length &gt; <span class="hljs-number">0</span>
+  discloser = discloser$.get(<span class="hljs-number">0</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Persist our references to the node</p></div></div><div class="code"><div class="wrapper">  fileMap[node.data.targetPath] = node$ <span class="hljs-keyword">if</span> node.type == <span class="hljs-string">'file'</span>
   appendSearchNode node$
 
   node$
 
-$<span class="function"> -&gt;</span>
+$<span class="hljs-function"> -&gt;</span>
   metaInfo =
-    <span class="attribute">relativeRoot</span>: $(<span class="string">'meta[name="groc-relative-root"]'</span>).attr(<span class="string">'content'</span>)
-    <span class="attribute">githubURL</span>:    $(<span class="string">'meta[name="groc-github-url"]'</span>).attr(<span class="string">'content'</span>)
-    <span class="attribute">documentPath</span>: $(<span class="string">'meta[name="groc-document-path"]'</span>).attr(<span class="string">'content'</span>)
-    <span class="attribute">projectPath</span>:  $(<span class="string">'meta[name="groc-project-path"]'</span>).attr(<span class="string">'content'</span>)
+    <span class="hljs-attribute">relativeRoot</span>: $(<span class="hljs-string">'meta[name="groc-relative-root"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">githubURL</span>:    $(<span class="hljs-string">'meta[name="groc-github-url"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">documentPath</span>: $(<span class="hljs-string">'meta[name="groc-document-path"]'</span>).attr(<span class="hljs-string">'content'</span>)
+    <span class="hljs-attribute">projectPath</span>:  $(<span class="hljs-string">'meta[name="groc-project-path"]'</span>).attr(<span class="hljs-string">'content'</span>)
 
   nav$    = buildNav metaInfo
-  toc$    = nav$.find <span class="string">'.toc'</span>
-  search$ = $(<span class="string">'#search'</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Select the current file, and expand up to it</p></div></div><div class="code"><div class="wrapper">  selectNodeByDocumentPath metaInfo.documentPath, window.location.hash.replace <span class="string">'#'</span>, <span class="string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the search box&#39;s focus state to toggle the table of contents.  This ensures that search
-will always be focused while the toc is up, and that it goes away once the user clicks off.</p></div></div><div class="code"><div class="wrapper">  search$.focus<span class="function"> -&gt;</span> setTableOfContentsActive <span class="literal">true</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>However, we don&#39;t want to hide the table of contents if you are clicking around in the nav.
-The blur event doesn&#39;t give us the previous event, sadly, so we first trap mousedown events</p></div></div><div class="code"><div class="wrapper">  lastMousedownTimestamp = <span class="literal">null</span>
-  nav$.mousedown <span class="function"><span class="params">(evt)</span> -&gt;</span>
-    lastMousedownTimestamp = evt.timeStamp <span class="keyword">unless</span> evt.target == toggle$[<span class="number">0</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And we refocus search if we are within a very short duration between the last mousedown in nav$.</p></div></div><div class="code"><div class="wrapper">  search$.blur <span class="function"><span class="params">(evt)</span> -&gt;</span>
-    <span class="keyword">if</span> evt.timeStamp - lastMousedownTimestamp &lt; <span class="number">10</span>
+  toc$    = nav$.find <span class="hljs-string">'.toc'</span>
+  search$ = $(<span class="hljs-string">'#search'</span>)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Select the current file, and expand up to it</p></div></div><div class="code"><div class="wrapper">  selectNodeByDocumentPath metaInfo.documentPath, <span class="hljs-built_in">window</span>.location.hash.replace <span class="hljs-string">'#'</span>, <span class="hljs-string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We use the search box's focus state to toggle the table of contents.  This ensures that search
+will always be focused while the toc is up, and that it goes away once the user clicks off.</p></div></div><div class="code"><div class="wrapper">  search$.focus<span class="hljs-function"> -&gt;</span> setTableOfContentsActive <span class="hljs-literal">true</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>However, we don't want to hide the table of contents if you are clicking around in the nav.
+The blur event doesn't give us the previous event, sadly, so we first trap mousedown events</p></div></div><div class="code"><div class="wrapper">  lastMousedownTimestamp = <span class="hljs-literal">null</span>
+  nav$.mousedown <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+    lastMousedownTimestamp = evt.timeStamp <span class="hljs-keyword">unless</span> evt.target == toggle$[<span class="hljs-number">0</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>And we refocus search if we are within a very short duration between the last mousedown in nav$.</p></div></div><div class="code"><div class="wrapper">  search$.blur <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> evt.timeStamp - lastMousedownTimestamp &lt; <span class="hljs-number">10</span>
       search$.focus()
-    <span class="keyword">else</span>
-      setTableOfContentsActive <span class="literal">false</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set up the table of contents toggle</p></div></div><div class="code"><div class="wrapper">  toggle$ = nav$.find <span class="string">'.toggle'</span>
-  toggle$.click <span class="function"><span class="params">(evt)</span> -&gt;</span>
-    <span class="keyword">if</span> search$.<span class="keyword">is</span> <span class="string">':focus'</span> <span class="keyword">then</span> search$.blur() <span class="keyword">else</span> search$.focus()
-    evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Prevent text selection if the user taps quickly</p></div></div><div class="code"><div class="wrapper">  toggle$.mousedown <span class="function"><span class="params">(evt)</span> -&gt;</span>
-    evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Arrow keys navigate the table of contents whenever it is visible</p></div></div><div class="code"><div class="wrapper">  $<span class="function"><span class="params">(<span class="string">'body'</span>)</span>.<span class="title">keydown</span> <span class="params">(evt)</span> -&gt;</span>
-    <span class="keyword">if</span> nav$.hasClass <span class="string">'active'</span>
-      <span class="keyword">switch</span> evt.keyCode
-        <span class="keyword">when</span> <span class="number">13</span> <span class="keyword">then</span> visitCurrentNode() <span class="comment"># return</span>
-        <span class="keyword">when</span> <span class="number">37</span> <span class="keyword">then</span> setCurrentNodeExpanded <span class="literal">false</span> <span class="comment"># left</span>
-        <span class="keyword">when</span> <span class="number">38</span> <span class="keyword">then</span> moveCurrentNode <span class="literal">true</span> <span class="comment"># up</span>
-        <span class="keyword">when</span> <span class="number">39</span> <span class="keyword">then</span> setCurrentNodeExpanded <span class="literal">true</span> <span class="comment"># right</span>
-        <span class="keyword">when</span> <span class="number">40</span> <span class="keyword">then</span> moveCurrentNode <span class="literal">false</span> <span class="comment"># down</span>
-        <span class="keyword">else</span> <span class="keyword">return</span>
+    <span class="hljs-keyword">else</span>
+      setTableOfContentsActive <span class="hljs-literal">false</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Set up the table of contents toggle</p></div></div><div class="code"><div class="wrapper">  toggle$ = nav$.find <span class="hljs-string">'.toggle'</span>
+  toggle$.click <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> search$.<span class="hljs-keyword">is</span> <span class="hljs-string">':focus'</span> <span class="hljs-keyword">then</span> search$.blur() <span class="hljs-keyword">else</span> search$.focus()
+    evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Prevent text selection if the user taps quickly</p></div></div><div class="code"><div class="wrapper">  toggle$.mousedown <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+    evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Arrow keys navigate the table of contents whenever it is visible</p></div></div><div class="code"><div class="wrapper">  $<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'body'</span>)</span>.<span class="hljs-title">keydown</span> <span class="hljs-params">(evt)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> nav$.hasClass <span class="hljs-string">'active'</span>
+      <span class="hljs-keyword">switch</span> evt.keyCode
+        <span class="hljs-keyword">when</span> <span class="hljs-number">13</span> <span class="hljs-keyword">then</span> visitCurrentNode() <span class="hljs-comment"># return</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-number">37</span> <span class="hljs-keyword">then</span> setCurrentNodeExpanded <span class="hljs-literal">false</span> <span class="hljs-comment"># left</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-number">38</span> <span class="hljs-keyword">then</span> moveCurrentNode <span class="hljs-literal">true</span> <span class="hljs-comment"># up</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-number">39</span> <span class="hljs-keyword">then</span> setCurrentNodeExpanded <span class="hljs-literal">true</span> <span class="hljs-comment"># right</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-number">40</span> <span class="hljs-keyword">then</span> moveCurrentNode <span class="hljs-literal">false</span> <span class="hljs-comment"># down</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span>
 
-      evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>searching</p></div></div><div class="code"><div class="wrapper">  search$.bind <span class="string">'keyup search'</span>, <span class="function"><span class="params">(evt)</span> -&gt;</span>
+      evt.preventDefault()</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>searching</p></div></div><div class="code"><div class="wrapper">  search$.bind <span class="hljs-string">'keyup search'</span>, <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
     searchNodes search$.val()
 
-  search$.keydown <span class="function"><span class="params">(evt)</span> -&gt;</span>
-    <span class="keyword">if</span> evt.keyCode == <span class="number">27</span> <span class="comment"># Esc</span>
-      <span class="keyword">if</span> search$.val().trim() == <span class="string">''</span>
+  search$.keydown <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> evt.keyCode == <span class="hljs-number">27</span> <span class="hljs-comment"># Esc</span>
+      <span class="hljs-keyword">if</span> search$.val().trim() == <span class="hljs-string">''</span>
         search$.blur()
-      <span class="keyword">else</span>
-        search$.val <span class="string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Make folded code blocks toggleable; the marker and the code are clickable.</p></div></div><div class="code"><div class="wrapper">  $<span class="function"><span class="params">(<span class="string">'.code.folded'</span>)</span>.<span class="title">each</span> <span class="params">(index, code)</span> -&gt;</span>
+      <span class="hljs-keyword">else</span>
+        search$.val <span class="hljs-string">''</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Make folded code blocks toggleable; the marker and the code are clickable.</p></div></div><div class="code"><div class="wrapper">  $<span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'.code.folded'</span>)</span>.<span class="hljs-title">each</span> <span class="hljs-params">(index, code)</span> -&gt;</span>
     code$ = $(code)
-    code$.click <span class="function"><span class="params">(evt)</span> -&gt;</span>
-      code$.toggleClass <span class="string">'folded'</span>
+    code$.click <span class="hljs-function"><span class="hljs-params">(evt)</span> -&gt;</span>
+      code$.toggleClass <span class="hljs-string">'folded'</span>
       evt.preventDefault()
-      <span class="keyword">return</span> <span class="literal">false</span></div></div></div></div></body></html>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span></div></div></div></div></body></html>

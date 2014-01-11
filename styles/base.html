@@ -1,111 +1,111 @@
-<!DOCTYPE html><html lang="en"><head><title>styles/base</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/base"><meta name="groc-project-path" content="lib/styles/base.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/base.coffee">lib/styles/base.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="built_in">require</span> <span class="string">'fs'</span>
-path = <span class="built_in">require</span> <span class="string">'path'</span>
+<!DOCTYPE html><html lang="en"><head><title>styles/base</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/base"><meta name="groc-project-path" content="lib/styles/base.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/base.coffee">lib/styles/base.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 
-fsTools = <span class="built_in">require</span> <span class="string">'fs-tools'</span>
+fsTools = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs-tools'</span>
 
-StyleHelpers = <span class="built_in">require</span> <span class="string">'../utils/style_helpers'</span>
-Utils        = <span class="built_in">require</span> <span class="string">'../utils'</span>
+StyleHelpers = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/style_helpers'</span>
+Utils        = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils'</span>
 
 
-module.<span class="built_in">exports</span> = <span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>
-  <span class="attribute">constructor</span>: <span class="function"><span class="params">(project)</span> -&gt;</span>
-    <span class="property">@project</span> = project
-    <span class="property">@log</span>     = project.log
-    <span class="property">@files</span>   = []
-    <span class="property">@outline</span> = {} <span class="comment"># Keyed on target path</span>
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span></span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(project)</span> -&gt;</span>
+    <span class="hljs-property">@project</span> = project
+    <span class="hljs-property">@log</span>     = project.log
+    <span class="hljs-property">@files</span>   = []
+    <span class="hljs-property">@outline</span> = {} <span class="hljs-comment"># Keyed on target path</span>
 
-  <span class="attribute">renderFile</span>: <span class="function"><span class="params">(data, fileInfo, callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'BaseStyle#renderFile(..., %j, ...)'</span>, fileInfo
+  <span class="hljs-attribute">renderFile</span>: <span class="hljs-function"><span class="hljs-params">(data, fileInfo, callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'BaseStyle#renderFile(..., %j, ...)'</span>, fileInfo
 
-    <span class="property">@files</span>.push fileInfo
+    <span class="hljs-property">@files</span>.push fileInfo
 
     segments = Utils.splitSource data, fileInfo.language,
-      <span class="attribute">requireWhitespaceAfterToken</span>: !!<span class="property">@project</span>.options.requireWhitespaceAfterToken
+      <span class="hljs-attribute">requireWhitespaceAfterToken</span>: !!<span class="hljs-property">@project</span>.options.requireWhitespaceAfterToken
 
-    <span class="property">@log</span>.debug <span class="string">'Split %s into %d segments'</span>, fileInfo.sourcePath, segments.length
+    <span class="hljs-property">@log</span>.debug <span class="hljs-string">'Split %s into %d segments'</span>, fileInfo.sourcePath, segments.length
 
-    Utils.parseDocTags segments, <span class="property">@project</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
-      <span class="keyword">if</span> error
-        <span class="property">@log</span>.error <span class="string">'Failed to parse doc tags %s: %s\n'</span>, fileInfo.sourcePath, error.message, error.stack
-        <span class="keyword">return</span> callback error
+    Utils.parseDocTags segments, <span class="hljs-property">@project</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to parse doc tags %s: %s\n'</span>, fileInfo.sourcePath, error.message, error.stack
+        <span class="hljs-keyword">return</span> callback error
 
-      Utils.markdownDocTags segments, <span class="property">@project</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
-        <span class="keyword">if</span> error
-          <span class="property">@log</span>.error <span class="string">'Failed to markdown doc tags %s: %s\n'</span>, fileInfo.sourcePath, error.message, error.stack
-          <span class="keyword">return</span> callback error
+      Utils.markdownDocTags segments, <span class="hljs-property">@project</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+        <span class="hljs-keyword">if</span> error
+          <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to markdown doc tags %s: %s\n'</span>, fileInfo.sourcePath, error.message, error.stack
+          <span class="hljs-keyword">return</span> callback error
 
-        <span class="property">@renderDocTags</span> segments
+        <span class="hljs-property">@renderDocTags</span> segments
 
-        <span class="keyword">if</span> <span class="property">@project</span>.options.highlighter <span class="keyword">is</span> <span class="string">'pygments'</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-property">@project</span>.options.highlighter <span class="hljs-keyword">is</span> <span class="hljs-string">'pygments'</span>
           highlightCode = Utils.highlightCodeUsingPygments
-        <span class="keyword">else</span>
+        <span class="hljs-keyword">else</span>
           highlightCode = Utils.highlightCodeUsingHighlightJS
 
-        highlightCode segments, fileInfo.language, <span class="function"><span class="params">(error)</span> =&gt;</span>
-          <span class="keyword">if</span> error
-            <span class="keyword">if</span> error.failedHighlights
-              <span class="keyword">for</span> highlight, i <span class="keyword">in</span> error.failedHighlights
-                <span class="property">@log</span>.debug <span class="string">"highlight <span class="subst">#{i}</span>:"</span>
-                <span class="property">@log</span>.warn   segments[i]?.code.join <span class="string">'\n'</span>
-                <span class="property">@log</span>.error  highlight
+        highlightCode segments, fileInfo.language, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+          <span class="hljs-keyword">if</span> error
+            <span class="hljs-keyword">if</span> error.failedHighlights
+              <span class="hljs-keyword">for</span> highlight, i <span class="hljs-keyword">in</span> error.failedHighlights
+                <span class="hljs-property">@log</span>.debug <span class="hljs-string">"highlight <span class="hljs-subst">#{i}</span>:"</span>
+                <span class="hljs-property">@log</span>.warn   segments[i]?.code.join <span class="hljs-string">'\n'</span>
+                <span class="hljs-property">@log</span>.error  highlight
 
-            <span class="property">@log</span>.error <span class="string">'Failed to highlight %s as %s: %s'</span>, fileInfo.sourcePath, fileInfo.language.name, error.message <span class="keyword">or</span> error
-            <span class="keyword">return</span> callback error
+            <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to highlight %s as %s: %s'</span>, fileInfo.sourcePath, fileInfo.language.name, error.message <span class="hljs-keyword">or</span> error
+            <span class="hljs-keyword">return</span> callback error
 
-          Utils.markdownComments segments, <span class="property">@project</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
-            <span class="keyword">if</span> error
-              <span class="property">@log</span>.error <span class="string">'Failed to markdown %s: %s'</span>, fileInfo.sourcePath, error.message
-              <span class="keyword">return</span> callback error
+          Utils.markdownComments segments, <span class="hljs-property">@project</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+            <span class="hljs-keyword">if</span> error
+              <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to markdown %s: %s'</span>, fileInfo.sourcePath, error.message
+              <span class="hljs-keyword">return</span> callback error
 
-            <span class="property">@outline</span>[fileInfo.targetPath] = StyleHelpers.outlineHeaders segments</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We also prefer to split out solo headers</p></div></div><div class="code"><div class="wrapper">            segments = StyleHelpers.segmentizeSoloHeaders segments
+            <span class="hljs-property">@outline</span>[fileInfo.targetPath] = StyleHelpers.outlineHeaders segments</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>We also prefer to split out solo headers</p></div></div><div class="code"><div class="wrapper">            segments = StyleHelpers.segmentizeSoloHeaders segments
 
-            <span class="property">@renderDocFile</span> segments, fileInfo, callback</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>renderDocTags: # THIS METHOD MUST BE DEFINED BY SUBCLASSES</p></div></div><div class="code"><div class="wrapper">  <span class="attribute">renderDocFile</span>: <span class="function"><span class="params">(segments, fileInfo, callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'BaseStyle#renderDocFile(..., %j, ...)'</span>, fileInfo
+            <span class="hljs-property">@renderDocFile</span> segments, fileInfo, callback</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>renderDocTags: # THIS METHOD MUST BE DEFINED BY SUBCLASSES</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">renderDocFile</span>: <span class="hljs-function"><span class="hljs-params">(segments, fileInfo, callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'BaseStyle#renderDocFile(..., %j, ...)'</span>, fileInfo
 
-    <span class="keyword">throw</span> <span class="keyword">new</span> Error <span class="string">"@templateFunc must be defined by subclasses!"</span> <span class="keyword">unless</span> <span class="property">@templateFunc</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"@templateFunc must be defined by subclasses!"</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@templateFunc</span>
 
-    docPath = path.resolve <span class="property">@project</span>.outPath, <span class="string">"<span class="subst">#{fileInfo.targetPath}</span>.html"</span>
+    docPath = path.resolve <span class="hljs-property">@project</span>.outPath, <span class="hljs-string">"<span class="hljs-subst">#{fileInfo.targetPath}</span>.html"</span>
 
-    fsTools.mkdir path.dirname<span class="function"><span class="params">(docPath)</span>, '0755', <span class="params">(error)</span> =&gt;</span>
-      <span class="keyword">if</span> error
-        <span class="property">@log</span>.error <span class="string">'Unable to create directory %s: %s'</span>, path.dirname(docPath), error.message
-        <span class="keyword">return</span> callback error
+    fsTools.mkdir path.dirname<span class="hljs-function"><span class="hljs-params">(docPath)</span>, '0755', <span class="hljs-params">(error)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Unable to create directory %s: %s'</span>, path.dirname(docPath), error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      <span class="keyword">for</span> segment <span class="keyword">in</span> segments
+      <span class="hljs-keyword">for</span> segment <span class="hljs-keyword">in</span> segments
         segment.markdownedComments = Utils.trimBlankLines segment.markdownedComments
         segment.highlightedCode    = Utils.trimBlankLines segment.highlightedCode
-        segment.foldMarker         = Utils.trimBlankLines(segment.foldMarker || <span class="string">''</span>)
+        segment.foldMarker         = Utils.trimBlankLines(segment.foldMarker || <span class="hljs-string">''</span>)
 
       templateContext =
-        <span class="attribute">project</span>:     <span class="property">@project</span>
-        <span class="attribute">segments</span>:    segments
-        <span class="attribute">pageTitle</span>:   fileInfo.pageTitle
-        <span class="attribute">sourcePath</span>:  fileInfo.sourcePath
-        <span class="attribute">targetPath</span>:  fileInfo.targetPath
-        <span class="attribute">projectPath</span>: fileInfo.projectPath</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>How many levels deep are we?</p></div></div><div class="code"><div class="wrapper">      pathChunks = path.dirname(fileInfo.targetPath).split(<span class="regexp">/[\/\\]/</span>)
-      <span class="keyword">if</span> pathChunks.length == <span class="number">1</span> &amp;&amp; pathChunks[<span class="number">0</span>] == <span class="string">'.'</span>
-        templateContext.relativeRoot = <span class="string">''</span>
-      <span class="keyword">else</span>
-        templateContext.relativeRoot = <span class="string">"<span class="subst">#{pathChunks.map(-&gt; <span class="string">'..'</span>).join <span class="string">'/'</span>}</span>/"</span>
+        <span class="hljs-attribute">project</span>:     <span class="hljs-property">@project</span>
+        <span class="hljs-attribute">segments</span>:    segments
+        <span class="hljs-attribute">pageTitle</span>:   fileInfo.pageTitle
+        <span class="hljs-attribute">sourcePath</span>:  fileInfo.sourcePath
+        <span class="hljs-attribute">targetPath</span>:  fileInfo.targetPath
+        <span class="hljs-attribute">projectPath</span>: fileInfo.projectPath</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>How many levels deep are we?</p></div></div><div class="code"><div class="wrapper">      pathChunks = path.dirname(fileInfo.targetPath).split(<span class="hljs-regexp">/[\/\\]/</span>)
+      <span class="hljs-keyword">if</span> pathChunks.length == <span class="hljs-number">1</span> &amp;&amp; pathChunks[<span class="hljs-number">0</span>] == <span class="hljs-string">'.'</span>
+        templateContext.relativeRoot = <span class="hljs-string">''</span>
+      <span class="hljs-keyword">else</span>
+        templateContext.relativeRoot = <span class="hljs-string">"<span class="hljs-subst">#{pathChunks.map(-&gt; <span class="hljs-string">'..'</span>).join <span class="hljs-string">'/'</span>}</span>/"</span>
 
-      <span class="keyword">try</span>
-        data = <span class="property">@templateFunc</span> templateContext
+      <span class="hljs-keyword">try</span>
+        data = <span class="hljs-property">@templateFunc</span> templateContext
 
-      <span class="keyword">catch</span> error
-        <span class="property">@log</span>.error <span class="string">'Rendering documentation template for %s failed: %s'</span>, docPath, error.message
-        <span class="keyword">return</span> callback error
+      <span class="hljs-keyword">catch</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Rendering documentation template for %s failed: %s'</span>, docPath, error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      fs.writeFile docPath, data, <span class="string">'utf-8'</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
-        <span class="keyword">if</span> error
-          <span class="property">@log</span>.error <span class="string">'Failed to write documentation file %s: %s'</span>, docPath, error.message
-          <span class="keyword">return</span> callback error
+      fs.writeFile docPath, data, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+        <span class="hljs-keyword">if</span> error
+          <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to write documentation file %s: %s'</span>, docPath, error.message
+          <span class="hljs-keyword">return</span> callback error
 
-        <span class="property">@log</span>.pass docPath
+        <span class="hljs-property">@log</span>.pass docPath
         callback()
 
-  <span class="attribute">renderCompleted</span>: <span class="function"><span class="params">(callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'BaseStyle#renderCompleted(...)'</span>
+  <span class="hljs-attribute">renderCompleted</span>: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'BaseStyle#renderCompleted(...)'</span>
 
-    <span class="property">@tableOfContents</span> = StyleHelpers.buildTableOfContents <span class="property">@files</span>, <span class="property">@outline</span>
+    <span class="hljs-property">@tableOfContents</span> = StyleHelpers.buildTableOfContents <span class="hljs-property">@files</span>, <span class="hljs-property">@outline</span>
 
     callback()</div></div></div></div></body></html>

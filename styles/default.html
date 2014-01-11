@@ -1,156 +1,156 @@
-<!DOCTYPE html><html lang="en"><head><title>styles/default</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/default"><meta name="groc-project-path" content="lib/styles/default.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default.coffee">lib/styles/default.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="built_in">require</span> <span class="string">'fs'</span>
-path = <span class="built_in">require</span> <span class="string">'path'</span>
+<!DOCTYPE html><html lang="en"><head><title>styles/default</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/default"><meta name="groc-project-path" content="lib/styles/default.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default.coffee">lib/styles/default.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 
-_            = <span class="built_in">require</span> <span class="string">'underscore'</span>
-coffeeScript = <span class="built_in">require</span> <span class="string">'coffee-script'</span>
-fsTools      = <span class="built_in">require</span> <span class="string">'fs-tools'</span>
-jade         = <span class="built_in">require</span> <span class="string">'jade'</span>
-uglifyJs     = <span class="built_in">require</span> <span class="string">'uglify-js'</span>
-humanize     = <span class="built_in">require</span> <span class="string">'../utils/humanize'</span>
-Base = <span class="built_in">require</span> <span class="string">'./base'</span>
+_            = <span class="hljs-built_in">require</span> <span class="hljs-string">'underscore'</span>
+coffeeScript = <span class="hljs-built_in">require</span> <span class="hljs-string">'coffee-script'</span>
+fsTools      = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs-tools'</span>
+jade         = <span class="hljs-built_in">require</span> <span class="hljs-string">'jade'</span>
+uglifyJs     = <span class="hljs-built_in">require</span> <span class="hljs-string">'uglify-js'</span>
+humanize     = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/humanize'</span>
+Base = <span class="hljs-built_in">require</span> <span class="hljs-string">'./base'</span>
 
 
-module.<span class="built_in">exports</span> = <span class="class"><span class="keyword">class</span> <span class="title">Default</span> <span class="keyword">extends</span> <span class="title">Base</span></span>
-  <span class="attribute">STATIC_ASSETS</span>: [<span class="string">'style.css'</span>]
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Default</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Base</span></span>
+  <span class="hljs-attribute">STATIC_ASSETS</span>: [<span class="hljs-string">'style.css'</span>]
 
-  <span class="attribute">constructor</span>: <span class="function"><span class="params">(args...)</span> -&gt;</span>
-    <span class="keyword">super</span>(args...)
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
+    <span class="hljs-keyword">super</span>(args...)
 
-    <span class="property">@sourceAssets</span> = path.join __dirname, <span class="string">'default'</span>
-    <span class="property">@targetAssets</span> = path.resolve <span class="property">@project</span>.outPath, <span class="string">'assets'</span>
+    <span class="hljs-property">@sourceAssets</span> = path.join __dirname, <span class="hljs-string">'default'</span>
+    <span class="hljs-property">@targetAssets</span> = path.resolve <span class="hljs-property">@project</span>.outPath, <span class="hljs-string">'assets'</span>
 
-    templateData  = fs.readFileSync path.join(<span class="property">@sourceAssets</span>, <span class="string">'docPage.jade'</span>), <span class="string">'utf-8'</span>
-    <span class="property">@templateFunc</span> = jade.compile templateData
+    templateData  = fs.readFileSync path.join(<span class="hljs-property">@sourceAssets</span>, <span class="hljs-string">'docPage.jade'</span>), <span class="hljs-string">'utf-8'</span>
+    <span class="hljs-property">@templateFunc</span> = jade.compile templateData
 
-  <span class="attribute">renderCompleted</span>: <span class="function"><span class="params">(callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#renderCompleted(...)'</span>
+  <span class="hljs-attribute">renderCompleted</span>: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'styles.Default#renderCompleted(...)'</span>
 
-    <span class="keyword">super</span> <span class="function"><span class="params">(error)</span> =&gt;</span>
-      <span class="keyword">return</span> error <span class="keyword">if</span> error
-      <span class="property">@copyAssets</span> callback
+    <span class="hljs-keyword">super</span> <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> error <span class="hljs-keyword">if</span> error
+      <span class="hljs-property">@copyAssets</span> callback
 
-  <span class="attribute">copyAssets</span>: <span class="function"><span class="params">(callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#copyAssets(...)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Even though fsTools.copy creates directories if they&#39;re missing - we want a bit more control
-over it (permissions), as well as wanting to avoid contention.</p></div></div><div class="code"><div class="wrapper">    fsTools.mkdir <span class="property">@targetAssets</span>, <span class="string">'0755'</span>, <span class="function"><span class="params">(error)</span> =&gt;</span>
-      <span class="keyword">if</span> error
-        <span class="property">@log</span>.error <span class="string">'Unable to create directory %s: %s'</span>, <span class="property">@targetAssets</span>, error.message
-        <span class="keyword">return</span> callback error
-      <span class="property">@log</span>.trace <span class="string">'mkdir: %s'</span>, <span class="property">@targetAssets</span>
+  <span class="hljs-attribute">copyAssets</span>: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'styles.Default#copyAssets(...)'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Even though fsTools.copy creates directories if they're missing - we want a bit more control
+over it (permissions), as well as wanting to avoid contention.</p></div></div><div class="code"><div class="wrapper">    fsTools.mkdir <span class="hljs-property">@targetAssets</span>, <span class="hljs-string">'0755'</span>, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Unable to create directory %s: %s'</span>, <span class="hljs-property">@targetAssets</span>, error.message
+        <span class="hljs-keyword">return</span> callback error
+      <span class="hljs-property">@log</span>.trace <span class="hljs-string">'mkdir: %s'</span>, <span class="hljs-property">@targetAssets</span>
 
-      numCopied = <span class="number">0</span>
-      <span class="keyword">for</span> asset <span class="keyword">in</span> <span class="property">@STATIC_ASSETS</span>
-        <span class="keyword">do</span> <span class="function"><span class="params">(asset)</span> =&gt;</span>
-          assetTarget = path.join <span class="property">@targetAssets</span>, asset
-          fsTools.copy path.join<span class="function"><span class="params">(<span class="property">@sourceAssets</span>, asset)</span>, <span class="title">assetTarget</span>, <span class="params">(error)</span> =&gt;</span>
-            <span class="keyword">if</span> error
-              <span class="property">@log</span>.error <span class="string">'Unable to copy %s: %s'</span>, assetTarget, error.message
-              <span class="keyword">return</span> callback error
-            <span class="property">@log</span>.trace <span class="string">'Copied %s'</span>, assetTarget
+      numCopied = <span class="hljs-number">0</span>
+      <span class="hljs-keyword">for</span> asset <span class="hljs-keyword">in</span> <span class="hljs-property">@STATIC_ASSETS</span>
+        <span class="hljs-keyword">do</span> <span class="hljs-function"><span class="hljs-params">(asset)</span> =&gt;</span>
+          assetTarget = path.join <span class="hljs-property">@targetAssets</span>, asset
+          fsTools.copy path.join<span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@sourceAssets</span>, asset)</span>, <span class="hljs-title">assetTarget</span>, <span class="hljs-params">(error)</span> =&gt;</span>
+            <span class="hljs-keyword">if</span> error
+              <span class="hljs-property">@log</span>.error <span class="hljs-string">'Unable to copy %s: %s'</span>, assetTarget, error.message
+              <span class="hljs-keyword">return</span> callback error
+            <span class="hljs-property">@log</span>.trace <span class="hljs-string">'Copied %s'</span>, assetTarget
 
-            numCopied += <span class="number">1</span>
-            <span class="property">@compileScript</span> callback <span class="keyword">unless</span> numCopied &lt; <span class="property">@STATIC_ASSETS</span>.length
+            numCopied += <span class="hljs-number">1</span>
+            <span class="hljs-property">@compileScript</span> callback <span class="hljs-keyword">unless</span> numCopied &lt; <span class="hljs-property">@STATIC_ASSETS</span>.length
 
-  <span class="attribute">compileScript</span>: <span class="function"><span class="params">(callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#compileScript(...)'</span>
+  <span class="hljs-attribute">compileScript</span>: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'styles.Default#compileScript(...)'</span>
 
-    scriptPath = path.join <span class="property">@sourceAssets</span>, <span class="string">'behavior.coffee'</span>
-    fs.readFile scriptPath, <span class="string">'utf-8'</span>, <span class="function"><span class="params">(error, data)</span> =&gt;</span>
-      <span class="keyword">if</span> error
-        <span class="property">@log</span>.error <span class="string">'Failed to read %s: %s'</span>, scriptPath, error.message
-        <span class="keyword">return</span> callback error
+    scriptPath = path.join <span class="hljs-property">@sourceAssets</span>, <span class="hljs-string">'behavior.coffee'</span>
+    fs.readFile scriptPath, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-params">(error, data)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to read %s: %s'</span>, scriptPath, error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      <span class="keyword">try</span>
+      <span class="hljs-keyword">try</span>
         scriptSource = _.template data, @
-      <span class="keyword">catch</span> error
-        <span class="property">@log</span>.error <span class="string">'Failed to interpolate %s: %s'</span>, scriptPath, error.message
-        <span class="keyword">return</span> callback error
+      <span class="hljs-keyword">catch</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to interpolate %s: %s'</span>, scriptPath, error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      <span class="keyword">try</span>
+      <span class="hljs-keyword">try</span>
         scriptSource = coffeeScript.compile scriptSource
-        <span class="property">@log</span>.trace <span class="string">'Compiled %s'</span>, scriptPath
-      <span class="keyword">catch</span> error
-        <span class="property">@log</span>.debug scriptSource
-        <span class="property">@log</span>.error <span class="string">'Failed to compile %s: %s'</span>, scriptPath, error.message
-        <span class="keyword">return</span> callback error
+        <span class="hljs-property">@log</span>.trace <span class="hljs-string">'Compiled %s'</span>, scriptPath
+      <span class="hljs-keyword">catch</span> error
+        <span class="hljs-property">@log</span>.debug scriptSource
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to compile %s: %s'</span>, scriptPath, error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      <span class="comment">#@compressScript scriptSource, callback</span>
-      <span class="property">@concatenateScripts</span> scriptSource, callback
+      <span class="hljs-comment">#@compressScript scriptSource, callback</span>
+      <span class="hljs-property">@concatenateScripts</span> scriptSource, callback
 
-  <span class="attribute">compressScript</span>: <span class="function"><span class="params">(scriptSource, callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#compressScript(..., ...)'</span>
+  <span class="hljs-attribute">compressScript</span>: <span class="hljs-function"><span class="hljs-params">(scriptSource, callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'styles.Default#compressScript(..., ...)'</span>
 
-    <span class="keyword">try</span>
+    <span class="hljs-keyword">try</span>
       ast = uglifyJs.parser.parse scriptSource
       ast = uglifyJs.uglify.ast_mangle  ast
       ast = uglifyJs.uglify.ast_squeeze ast
 
       compiledSource = uglifyJs.uglify.gen_code ast
 
-    <span class="keyword">catch</span> error
-      <span class="property">@log</span>.error <span class="string">'Failed to compress assets/behavior.js: %s'</span>, error.message
-      <span class="keyword">return</span> callback error
+    <span class="hljs-keyword">catch</span> error
+      <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to compress assets/behavior.js: %s'</span>, error.message
+      <span class="hljs-keyword">return</span> callback error
 
-    <span class="property">@concatenateScripts</span> compiledSource, callback
+    <span class="hljs-property">@concatenateScripts</span> compiledSource, callback
 
-  <span class="attribute">concatenateScripts</span>: <span class="function"><span class="params">(scriptSource, callback)</span> -&gt;</span>
-    <span class="property">@log</span>.trace <span class="string">'styles.Default#concatenateScripts(..., ...)'</span>
+  <span class="hljs-attribute">concatenateScripts</span>: <span class="hljs-function"><span class="hljs-params">(scriptSource, callback)</span> -&gt;</span>
+    <span class="hljs-property">@log</span>.trace <span class="hljs-string">'styles.Default#concatenateScripts(..., ...)'</span>
 
-    jqueryPath = path.join <span class="property">@sourceAssets</span>, <span class="string">'jquery.min.js'</span>
-    fs.readFile jqueryPath, <span class="string">'utf-8'</span>, <span class="function"><span class="params">(error, data)</span> =&gt;</span>
-      <span class="keyword">if</span> error
-        <span class="property">@log</span>.error <span class="string">'Failed to read %s: %s'</span>, jqueryPath, error.message
-        <span class="keyword">return</span> callback error
+    jqueryPath = path.join <span class="hljs-property">@sourceAssets</span>, <span class="hljs-string">'jquery.min.js'</span>
+    fs.readFile jqueryPath, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-params">(error, data)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> error
+        <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to read %s: %s'</span>, jqueryPath, error.message
+        <span class="hljs-keyword">return</span> callback error
 
-      outputPath = path.join <span class="property">@targetAssets</span>, <span class="string">'behavior.js'</span>
-      fs.writeFile outputPath, data + scriptSource, <span class="function"><span class="params">(error)</span> =&gt;</span>
-        <span class="keyword">if</span> error
-          <span class="property">@log</span>.error <span class="string">'Failed to write %s: %s'</span>, outputPath, error.message
-          <span class="keyword">return</span> callback error
-        <span class="property">@log</span>.trace <span class="string">'Wrote %s'</span>, outputPath
+      outputPath = path.join <span class="hljs-property">@targetAssets</span>, <span class="hljs-string">'behavior.js'</span>
+      fs.writeFile outputPath, data + scriptSource, <span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span>
+        <span class="hljs-keyword">if</span> error
+          <span class="hljs-property">@log</span>.error <span class="hljs-string">'Failed to write %s: %s'</span>, outputPath, error.message
+          <span class="hljs-keyword">return</span> callback error
+        <span class="hljs-property">@log</span>.trace <span class="hljs-string">'Wrote %s'</span>, outputPath
 
         callback()
 
-  <span class="attribute">renderDocTags</span>: <span class="function"><span class="params">(segments)</span> -&gt;</span>
-    <span class="keyword">for</span> segment, segmentIndex <span class="keyword">in</span> segments <span class="keyword">when</span> segment.tagSections?
+  <span class="hljs-attribute">renderDocTags</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> segment, segmentIndex <span class="hljs-keyword">in</span> segments <span class="hljs-keyword">when</span> segment.tagSections?
 
       sections = segment.tagSections
-      output = <span class="string">''</span>
-      metaOutput = <span class="string">''</span>
-      accessClasses = <span class="string">'doc-section'</span>
+      output = <span class="hljs-string">''</span>
+      metaOutput = <span class="hljs-string">''</span>
+      accessClasses = <span class="hljs-string">'doc-section'</span>
 
-      accessClasses += <span class="string">" doc-section-<span class="subst">#{tag.name}</span>"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.access <span class="keyword">if</span> sections.access?
+      accessClasses += <span class="hljs-string">" doc-section-<span class="hljs-subst">#{tag.name}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.access <span class="hljs-keyword">if</span> sections.access?
 
       segment.accessClasses = accessClasses
 
       firstPart = []
-      firstPart.push tag.markdown <span class="keyword">for</span> tag <span class="keyword">in</span> sections.access <span class="keyword">if</span> sections.access?
-      firstPart.push tag.markdown <span class="keyword">for</span> tag <span class="keyword">in</span> sections.special <span class="keyword">if</span> sections.special?
-      firstPart.push tag.markdown <span class="keyword">for</span> tag <span class="keyword">in</span> sections.type <span class="keyword">if</span> sections.type?
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.access <span class="hljs-keyword">if</span> sections.access?
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.special <span class="hljs-keyword">if</span> sections.special?
+      firstPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.type <span class="hljs-keyword">if</span> sections.type?
 
-      metaOutput += <span class="string">"<span class="subst">#{humanize.capitalize firstPart.join(<span class="string">' '</span>)}</span>"</span>
-      <span class="keyword">if</span> sections.flags? <span class="keyword">or</span> sections.metadata?
+      metaOutput += <span class="hljs-string">"<span class="hljs-subst">#{humanize.capitalize firstPart.join(<span class="hljs-string">' '</span>)}</span>"</span>
+      <span class="hljs-keyword">if</span> sections.flags? <span class="hljs-keyword">or</span> sections.metadata?
         secondPart = []
-        secondPart.push tag.markdown <span class="keyword">for</span> tag <span class="keyword">in</span> sections.flags <span class="keyword">if</span> sections.flags?
-        secondPart.push tag.markdown <span class="keyword">for</span> tag <span class="keyword">in</span> sections.metadata <span class="keyword">if</span> sections.metadata?
-        metaOutput += <span class="string">" <span class="subst">#{humanize.joinSentence secondPart}</span>"</span>
+        secondPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.flags <span class="hljs-keyword">if</span> sections.flags?
+        secondPart.push tag.markdown <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.metadata <span class="hljs-keyword">if</span> sections.metadata?
+        metaOutput += <span class="hljs-string">" <span class="hljs-subst">#{humanize.joinSentence secondPart}</span>"</span>
 
-      output += <span class="string">"&lt;span class='doc-section-header'&gt;<span class="subst">#{metaOutput}</span>&lt;/span&gt;\n\n"</span> <span class="keyword">if</span> metaOutput <span class="keyword">isnt</span> <span class="string">''</span>
+      output += <span class="hljs-string">"&lt;span class='doc-section-header'&gt;<span class="hljs-subst">#{metaOutput}</span>&lt;/span&gt;\n\n"</span> <span class="hljs-keyword">if</span> metaOutput <span class="hljs-keyword">isnt</span> <span class="hljs-string">''</span>
 
-      output += <span class="string">"<span class="subst">#{tag.markdown}</span>\n\n"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.description <span class="keyword">if</span> sections.description?
+      output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.description <span class="hljs-keyword">if</span> sections.description?
 
-      output += <span class="string">"<span class="subst">#{tag.markdown}</span>\n\n"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.todo <span class="keyword">if</span> sections.todo?
+      output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.todo <span class="hljs-keyword">if</span> sections.todo?
 
-      <span class="keyword">if</span> sections.params?
-        output += <span class="string">'Parameters:\n\n'</span>
-        output += <span class="string">"<span class="subst">#{tag.markdown}</span>\n\n"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.params
+      <span class="hljs-keyword">if</span> sections.params?
+        output += <span class="hljs-string">'Parameters:\n\n'</span>
+        output += <span class="hljs-string">"<span class="hljs-subst">#{tag.markdown}</span>\n\n"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.params
 
-      <span class="keyword">if</span> sections.returns?
-        output += (humanize.capitalize(tag.markdown) <span class="keyword">for</span> tag <span class="keyword">in</span> sections.returns <span class="keyword">if</span> sections.returns?).join(<span class="string">'&lt;br/&gt;**and** '</span>)
+      <span class="hljs-keyword">if</span> sections.returns?
+        output += (humanize.capitalize(tag.markdown) <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.returns <span class="hljs-keyword">if</span> sections.returns?).join(<span class="hljs-string">'&lt;br/&gt;**and** '</span>)
 
-      <span class="keyword">if</span> sections.howto?
-        output += <span class="string">"\n\nHow-To:\n\n<span class="subst">#{humanize.gutterify tag.markdown, <span class="number">0</span>}</span>"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.howto
+      <span class="hljs-keyword">if</span> sections.howto?
+        output += <span class="hljs-string">"\n\nHow-To:\n\n<span class="hljs-subst">#{humanize.gutterify tag.markdown, <span class="hljs-number">0</span>}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.howto
 
-      <span class="keyword">if</span> sections.example?
-        output += <span class="string">"\n\nExample:\n\n<span class="subst">#{humanize.gutterify tag.markdown, <span class="number">4</span>}</span>"</span> <span class="keyword">for</span> tag <span class="keyword">in</span> sections.example
+      <span class="hljs-keyword">if</span> sections.example?
+        output += <span class="hljs-string">"\n\nExample:\n\n<span class="hljs-subst">#{humanize.gutterify tag.markdown, <span class="hljs-number">4</span>}</span>"</span> <span class="hljs-keyword">for</span> tag <span class="hljs-keyword">in</span> sections.example
 
-      segment.comments = output.split <span class="string">'\n'</span></div></div></div></div></body></html>
+      segment.comments = output.split <span class="hljs-string">'\n'</span></div></div></div></div></body></html>

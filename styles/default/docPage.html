@@ -1,38 +1,37 @@
-<!DOCTYPE html><html lang="en"><head><title>styles/default/docPage</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/docPage"><meta name="groc-project-path" content="lib/styles/default/docPage.jade"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/docPage.jade">lib/styles/default/docPage.jade</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">!!! <span class="number">5</span>
-html(lang=<span class="string">"en"</span>)
+<!DOCTYPE html><html lang="en"><head><title>styles/default/docPage</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="styles/default/docPage"><meta name="groc-project-path" content="lib/styles/default/docPage.jade"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/default/docPage.jade">lib/styles/default/docPage.jade</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-doctype">!!! 5</span>
+html(lang="en")
   head
     title= pageTitle
-  meta(http-equiv=<span class="string">"Content-Type"</span>, content=<span class="string">"text/html; charset=utf-8"</span>)
-  meta(name=<span class="string">"viewport"</span>, content=<span class="string">"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"</span>)
-  meta(name=<span class="string">"groc-relative-root"</span>, content=relativeRoot)
-  meta(name=<span class="string">"groc-document-path"</span>, content=targetPath)
-  meta(name=<span class="string">"groc-project-path"</span>, content=projectPath)
-  - <span class="keyword">if</span> (project.githubURL)
-    meta(name=<span class="string">"groc-github-url"</span>, content=project.githubURL)
-  link(rel=<span class="string">"stylesheet"</span>, type=<span class="string">"text/css"</span>, media=<span class="string">"all"</span>, href=relativeRoot + <span class="string">"assets/style.css"</span>)
-  script(type=<span class="string">"text/javascript"</span>, src=relativeRoot + <span class="string">"assets/behavior.js"</span>)
+  meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0")
+  meta(name="groc-relative-root", content=relativeRoot)
+  meta(name="groc-document-path", content=targetPath)
+  meta(name="groc-project-path", content=projectPath)
+  -<span class="ruby"> <span class="hljs-keyword">if</span> (project.githubURL)
+</span>    meta(name="groc-github-url", content=project.githubURL)
+  link(rel="stylesheet", type="text/css", media="all", href=relativeRoot + "assets/style.css")
+  script(type="text/javascript", src=relativeRoot + "assets/behavior.js")
 
   body
-    <span class="preprocessor">#meta</span>
-      - <span class="keyword">if</span> (project.githubURL)
-        .file-path
-          a(href=project.githubURL + <span class="string">'/blob/master/'</span> + projectPath)= projectPath
-      - <span class="keyword">else</span>
-        .file-path= projectPath
-    <span class="preprocessor">#document</span>
-      - <span class="keyword">for</span> (var i in segments)
-        .segment
-          - <span class="keyword">if</span> (segments[i].markdownedComments != <span class="string">''</span>)
-            <span class="keyword">div</span>(<span class="class"><span class="keyword">class</span>="<span class="title">comments</span> " + (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">accessClasses</span> || ''))
-              .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">markdownedComments</span>
+    #meta
+      -<span class="ruby"> <span class="hljs-keyword">if</span> (project.githubURL)
+</span>        .file-path
+          a(href=project.githubURL + '/blob/master/' + projectPath)= projectPath
+      -<span class="ruby"> <span class="hljs-keyword">else</span>
+</span>        .file-path= projectPath
+    #document
+      -<span class="ruby"> <span class="hljs-keyword">for</span> (var i <span class="hljs-keyword">in</span> segments)
+</span>        .segment
+          -<span class="ruby"> <span class="hljs-keyword">if</span> (segments[i].markdownedComments != <span class="hljs-string">''</span>)
+</span>            div(class="comments " + (segments[i].accessClasses || ''))
+              .wrapper!= segments[i].markdownedComments
 
-          - <span class="title">if</span> (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span> != '')
-            - <span class="title">if</span> (<span class="title">segments</span>[<span class="title">i</span>].<span class="title">foldMarker</span> != '')
-              .<span class="title">code</span>.<span class="title">folded</span>
-                .<span class="title">wrapper</span>.<span class="title">marker</span>
-                  <span class="title">span</span>.<span class="title">c1</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">foldMarker</span>
-                .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span>
-            - <span class="title">else</span>
-              .<span class="title">code</span>
-                .<span class="title">wrapper</span>!= <span class="title">segments</span>[<span class="title">i</span>].<span class="title">highlightedCode</span>
-</span></div></div></div></div></body></html>
+          -<span class="ruby"> <span class="hljs-keyword">if</span> (segments[i].highlightedCode != <span class="hljs-string">''</span>)
+</span>            -<span class="ruby"> <span class="hljs-keyword">if</span> (segments[i].foldMarker != <span class="hljs-string">''</span>)
+</span>              .code.folded
+                .wrapper.marker
+                  span.c1!= segments[i].foldMarker
+                .wrapper!= segments[i].highlightedCode
+            -<span class="ruby"> <span class="hljs-keyword">else</span>
+</span>              .code
+                .wrapper!= segments[i].highlightedCode</div></div></div></div></body></html>
