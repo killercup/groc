@@ -1,0 +1,216 @@
+@import "helpers";
+@import "highlight-solarized-dark";
+@import "highlight-solarized-light";
+
+// ## Fonts
+@import url(http://fonts.googleapis.com/css?family=PT+Mono);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
+
+body {
+  font-size: 16px;
+  font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.4;
+}
+
+%code-font {
+  font-family: 'PT Sans Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4 * 16px;
+}
+
+// ## Vars
+$solarized-dark:  #002b36;
+$solarized-light: #fdf6e3;
+$solarized-light-color: #657b83;
+$solarized-light-green: #859900;
+$solarized-light-cyan: #2aa198;
+
+$body-background: $solarized-dark;
+$text-background: lighten($solarized-light, 4%);
+$text-color: darken($solarized-light-color, 10%);
+$text-link-color: $solarized-light-green;
+$color-selected: $solarized-light-cyan;
+
+$nav-width: 14em;
+$left-width: 30em;
+$side-padding: 1em;
+
+// ## Layout
+
+@mixin scroll-box {
+  box-sizing: border-box;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  clear: both;
+}
+
+ul, ol {
+  margin: 0 0.5em;
+  padding: 0 0 0 1em;
+}
+
+// ### flex
+body {
+  display: flex;
+
+  > nav {
+    //flex: 1;
+  }
+  
+  #file-area {
+    flex: 1;
+  }
+}
+
+body > nav {
+  width: $nav-width;
+  overflow-x: auto;
+  min-height: 100%;
+  background: darken($body-background, 2%);
+  
+  ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    padding: 0.1em 0.5em;
+  }
+  
+  a {
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .tools {
+    padding-top: 0.5em;
+    margin-bottom: 1em;
+  }
+  
+  li.selected a {
+    color: $color-selected;
+  }
+  
+  &.searching {
+    .toc li {
+      display: none;
+      
+      &.matched {
+        display: block;
+      }
+    }
+  }
+}
+
+#meta {
+  padding: 0.5em;
+  @extend %code-font;
+}
+
+.segment {    
+  clear: both;
+  box-sizing: border-box;
+  padding: 0.5em 0 0.5em $left-width;
+  
+  white-space: nowrap;
+  
+  .comments,
+  .code {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 $side-padding;
+  }
+  
+  .comments {
+    width: $left-width - (2 * $side-padding);
+    margin-left: -1 * $left-width;
+    white-space: normal;
+    
+    pre {
+      @extend %code-font;
+      @include solarized-light('code');
+
+      code {
+        @include scroll-box;
+      }
+    }
+  }
+  
+  .code {
+    white-space: pre;
+    padding-top: 0.5em;
+    
+    @extend %code-font;
+    @include solarized-dark();
+  }
+}
+
+$col-3: $nav-width + 2 * $left-width;
+
+@media screen and (max-width: $col-3) {
+  body {
+    display: block;
+    
+    > nav {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 2 * $left-width) {
+  .segment {
+    padding: 0.5em;
+
+    .code, .comments {
+      display: block;
+      padding: 0.5em;
+      margin-left: 0;
+      width: auto;
+    }
+    
+    .wrapper {
+      @include scroll-box;
+    }
+  }
+}
+
+// ## Color
+body {
+  background: $body-background;
+  color: white;
+}
+
+a {
+  color: $text-link-color;
+}
+
+#document {
+  @include linear-gradient(
+    90deg,
+    $text-background 0%,
+    $text-background $left-width,
+    $body-background $left-width,
+    $body-background 100%,
+    $fallback: $body-background
+  );
+  
+  .comments {
+    color: $text-color;
+  }
+  
+  @media screen and (max-width: 2 * $left-width) {
+    background: $text-background;
+  }
+}
