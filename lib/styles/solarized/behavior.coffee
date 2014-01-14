@@ -69,6 +69,9 @@ buildFileTree = (tree, ul, metaInfo) ->
     $node = $("""<li class="#{node.type}"/>""")
     if node.type is 'file'
       currentFile = metaInfo.documentPath is node.data.targetPath
+      if currentFile
+        console.warn 'duplicate currentFile' if metaInfo.currentFileNode
+        metaInfo.currentFileNode = node
 
       $node.append """<a class="label#{if currentFile then ' selected' else ''}" href="#{metaInfo.relativeRoot}#{node.data.targetPath}.html" title="#{node.data.projectPath}"><span class="text">#{node.data.title}</span></a>"""
     else
@@ -77,6 +80,33 @@ buildFileTree = (tree, ul, metaInfo) ->
     if node.children?.length > 0
       $children = $('<ol class="children"/>')
       $node.append buildFileTree node.children, $children, metaInfo
+
+    ul.append $node
+    return
+
+  return ul
+
+
+###
+@method Build Headlines Tree Recursively
+@param {Object} tree Tree of headlines
+@param {jQuery} ul DOM node of list to append this tree to
+@param {Object} metaInfo Project information
+@return {jQuery} The ul element
+###
+buildHeadlinesTree = (tree, ul, metaInfo) ->
+  ul = $(ul)
+  unless tree?.length
+    console.warn 'no tree', tree
+    return ul
+
+  $.each tree, (index, node) ->
+    $node = $("""<li class="#{node.type}"/>""")
+    $node.append """<a class="label" href="##{node.data.slug}"><span class="text">#{node.data.title}</span></a>"""
+
+    if node.children?.length > 0
+      $children = $('<ol class="children"/>')
+      $node.append buildHeadlinesTree node.children, $children, metaInfo
 
     ul.append $node
     return
@@ -99,6 +129,15 @@ createNav = (metaInfo) ->
           </li>
         </ul>
         <ol id="file-tree"/>
+      </nav>
+      <nav id="headlines">
+        <ul class="tools">
+          <li class="toggle">Headlines</li>
+          <li class="search">
+            <input id="search-headlines" type="search" autocomplete="off"/>
+          </li>
+        </ul>
+        <ol id="headline-tree"/>
       </nav>
     </div>
   """
@@ -174,7 +213,21 @@ searchTree = ($tree, $search) ->
 ###
 buildNav = (fileTree, metaInfo) ->
   $nav = createNav(metaInfo)
+
+  # file tree
   buildFileTree fileTree, $nav.find('#file-tree'), metaInfo
+  searchTree $nav.find('#file-tree'), $nav.find('#search-files')
+
+  # headlines tree
+  if file = metaInfo.currentFileNode
+    headlineTree = null
+    if file.data.firstHeader
+      headlineTree = [file.data.firstHeader]
+    else
+      headlineTree = file.outline
+
+    buildHeadlinesTree headlineTree, $nav.find('#headline-tree'), metaInfo
+    searchTree $nav.find('#headline-tree'), $nav.find('#search-headlines')
   return $nav
 
 $ ->
@@ -186,6 +239,4 @@ $ ->
 
   $nav = buildNav globalFileTree, metaInfo
   $nav.prependTo $('body')
-
-  searchTree $nav.find('#file-tree'), $nav.find('#search-files')
 
