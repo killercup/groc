@@ -12,7 +12,7 @@ body {
   line-height: 1.4;
 }
 
-%code-font {
+code, pre, %code-font {
   font-family: 'PT Sans Mono', monospace;
   font-size: 14px;
   line-height: 1.4 * 16px;
@@ -141,7 +141,6 @@ body {
 
 #meta {
   padding: 0.5em;
-  @extend %code-font;
 }
 
 .segment {    

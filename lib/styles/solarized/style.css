@@ -8,7 +8,7 @@ body {
   font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.4; }
 
-#meta, .segment .comments pre, .segment .code {
+code, pre, .segment .comments pre, code, pre, .segment .code {
   font-family: 'PT Sans Mono', monospace;
   font-size: 14px;
   line-height: 22.4px; }

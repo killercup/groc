@@ -217,11 +217,13 @@ searchTree = ($tree, $search) ->
 buildNav = (fileTree, metaInfo) ->
   $nav = createNav(metaInfo)
 
-  # file tree
+  # Build file tree
+  #
+  # This also sets `metaInfo.currentFileNode`.
   buildFileTree fileTree, $nav.find('#file-tree'), metaInfo
   searchTree $nav.find('#file-tree'), $nav.find('#search-files')
 
-  # headlines tree
+  # Build headlines tree
   if file = metaInfo.currentFileNode
     headlineTree = null
     if file.data.firstHeader
@@ -242,4 +244,5 @@ $ ->
 
   $nav = buildNav globalFileTree, metaInfo
   $nav.prependTo $('body')
+
 

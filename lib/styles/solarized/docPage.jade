@@ -16,10 +16,10 @@ html(lang="en")
     #file-area
       #meta
         - if (project.githubURL)
-          .file-path
+          code.file-path
             a(href=project.githubURL + '/blob/master/' + projectPath)= projectPath
         - else
-          .file-path= projectPath
+          code.file-path= projectPath
       #document
         - for (var i in segments)
           .segment
