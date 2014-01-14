@@ -129,7 +129,7 @@ createNav = (metaInfo) ->
               <input id="search-files" type="search" autocomplete="off" placeholder="Search"/>
             </li>
           </ul>
-          <ol id="file-tree"/>
+          <ol class="tree" id="file-tree"/>
         </details>
       </nav>
       <nav id="headlines">
@@ -140,7 +140,7 @@ createNav = (metaInfo) ->
               <input id="search-headlines" type="search" autocomplete="off" placeholder="Search"/>
             </li>
           </ul>
-          <ol id="headline-tree"/>
+          <ol class="tree" id="headline-tree"/>
         </details>
       </nav>
     </aside>
