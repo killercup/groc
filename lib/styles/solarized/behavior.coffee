@@ -53,7 +53,7 @@ globalFileTree = <%= JSON.stringify(tableOfContents) %>
 $ = Zepto or jQuery
 
 ###
-@method Build File Tree Recursively
+## Build File Tree Recursively
 @param {Array} tree List of file or folder Objects
 @param {jQuery} ul DOM node of list to append this tree to
 @param {Object} metaInfo Project information
@@ -88,7 +88,7 @@ buildFileTree = (tree, ul, metaInfo) ->
 
 
 ###
-@method Build Headlines Tree Recursively
+## Build Headlines Tree Recursively
 @param {Object} tree Tree of headlines
 @param {jQuery} ul DOM node of list to append this tree to
 @param {Object} metaInfo Project information
@@ -114,38 +114,42 @@ buildHeadlinesTree = (tree, ul, metaInfo) ->
   return ul
 
 ###
-@method Create Navigation Element
+## Create Navigation Element
 @param {Object} metaInfo Project information
 @return {jQuery} Navigation element
 ###
 createNav = (metaInfo) ->
   $nav = $ """
-    <div id="side-menu">
+    <aside id="side-menu">
       <nav id="files">
-        <ul class="tools">
-          <li class="toggle">Files</li>
-          <li class="search">
-            <input id="search-files" type="search" autocomplete="off"/>
-          </li>
-        </ul>
-        <ol id="file-tree"/>
+        <details>
+          <summary>Files</summary>
+          <ul class="tools">
+            <li class="search">
+              <input id="search-files" type="search" autocomplete="off" placeholder="Search"/>
+            </li>
+          </ul>
+          <ol id="file-tree"/>
+        </details>
       </nav>
       <nav id="headlines">
-        <ul class="tools">
-          <li class="toggle">Headlines</li>
-          <li class="search">
-            <input id="search-headlines" type="search" autocomplete="off"/>
-          </li>
-        </ul>
-        <ol id="headline-tree"/>
+        <details>
+          <summary>Headlines</summary>
+          <ul class="tools">
+            <li class="search">
+              <input id="search-headlines" type="search" autocomplete="off" placeholder="Search"/>
+            </li>
+          </ul>
+          <ol id="headline-tree"/>
+        </details>
       </nav>
-    </div>
+    </aside>
   """
 
   return $nav
 
 ###
-@method Search Tree
+## Search Tree
 @param {jQuery} $tree The tree element to be searched
 @param {jQuery} $search The search input field
 ###
@@ -206,7 +210,7 @@ searchTree = ($tree, $search) ->
         $search.val ''
 
 ###
-@method Build Navigation
+## Build Navigation
 @param {Array} fileTree List of Files
 @param {Object} metaInfo Project information
 @return {jQuery} The nav element

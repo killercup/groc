@@ -18,6 +18,10 @@ body {
   line-height: 1.4 * 16px;
 }
 
+.doc-section-header {
+  font-weight: bold;
+}
+
 // ## Vars
 $solarized-dark:  #002b36;
 $solarized-light: #fdf6e3;
@@ -73,13 +77,17 @@ body {
 #side-menu nav {
   width: $nav-width;
   overflow-x: auto;
-  min-height: 100%;
   background: darken($body-background, 2%);
+  margin-bottom: 1em;
   
   ul, ol {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  ol {
+    padding-bottom: 0.5em;
   }
   
   li {
@@ -99,6 +107,21 @@ body {
   .tools {
     padding-top: 0.5em;
     margin-bottom: 1em;
+  }
+
+  .search {
+    input {
+      width: 100%;
+    }
+  }
+
+  summary {
+    text-align: center;
+    padding: 0.5em 0;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
   
   a.selected {

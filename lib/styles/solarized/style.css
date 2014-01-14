@@ -13,6 +13,9 @@ body {
   font-size: 14px;
   line-height: 22.4px; }
 
+.doc-section-header {
+  font-weight: bold; }
+
 body {
   margin: 0;
   padding: 0;
@@ -31,12 +34,14 @@ body {
 #side-menu nav {
   width: 14em;
   overflow-x: auto;
-  min-height: 100%;
-  background: #00232c; }
+  background: #00232c;
+  margin-bottom: 1em; }
   #side-menu nav ul, #side-menu nav ol {
     list-style: none;
     padding: 0;
     margin: 0; }
+  #side-menu nav ol {
+    padding-bottom: 0.5em; }
   #side-menu nav li {
     padding: 0 0.5em; }
   #side-menu nav a {
@@ -48,6 +53,13 @@ body {
   #side-menu nav .tools {
     padding-top: 0.5em;
     margin-bottom: 1em; }
+  #side-menu nav .search input {
+    width: 100%; }
+  #side-menu nav summary {
+    text-align: center;
+    padding: 0.5em 0; }
+    #side-menu nav summary:hover {
+      cursor: pointer; }
   #side-menu nav a.selected {
     color: #2aa198; }
   #side-menu nav ol.searching a {
