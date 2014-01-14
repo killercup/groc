@@ -183,14 +183,13 @@ searchTree = ($tree, $search) ->
       return
 
     $tree.addClass 'searching'
-    matched = 0
     $tree.find('a').each (index, item) ->
       $item = $(item)
-      if $item.text().toLowerCase().indexOf(value) > -1
-        matched += 1
+      if $item.text().toLowerCase().indexOf(value) > -1 or $item.attr('href').toLowerCase().indexOf(value) > -1
         $item.addClass 'matched'
+        # show folders above matched item
+        $item.parents('li').children('.label').addClass 'matched'
       return
-    console.log 'searched for', value, 'matched:', matched
 
   value = null
   $search.on 'keyup search', (event) ->
