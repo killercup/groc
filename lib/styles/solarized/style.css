@@ -28,29 +28,31 @@ body {
   body #file-area {
     flex: 1; }
 
-body > nav {
+#side-menu nav {
   width: 14em;
   overflow-x: auto;
   min-height: 100%;
   background: #00232c; }
-  body > nav ul, body > nav ol {
+  #side-menu nav ul, #side-menu nav ol {
     list-style: none;
     padding: 0;
     margin: 0; }
-  body > nav li {
-    padding: 0.1em 0.5em; }
-  body > nav a {
+  #side-menu nav li {
+    padding: 0 0.5em; }
+  #side-menu nav a {
+    display: block;
+    padding: 0.1em 0;
     text-decoration: none; }
-    body > nav a:hover {
+    #side-menu nav a:hover {
       text-decoration: underline; }
-  body > nav .tools {
+  #side-menu nav .tools {
     padding-top: 0.5em;
     margin-bottom: 1em; }
-  body > nav li.selected a {
+  #side-menu nav a.selected {
     color: #2aa198; }
-  body > nav.searching .toc li {
+  #side-menu nav ol.searching a {
     display: none; }
-    body > nav.searching .toc li.matched {
+    #side-menu nav ol.searching a.matched {
       display: block; }
 
 #meta {
@@ -159,8 +161,8 @@ body > nav {
 @media screen and (max-width: 74em) {
   body {
     display: block; }
-    body > nav {
-      display: none; } }
+  #side-menu nav {
+    display: none; } }
 
 @media screen and (max-width: 60em) {
   .segment {

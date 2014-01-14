@@ -61,7 +61,7 @@ ul, ol {
 body {
   display: flex;
 
-  > nav {
+  #side-menu nav {
     //flex: 1;
   }
   
@@ -70,7 +70,7 @@ body {
   }
 }
 
-body > nav {
+#side-menu nav {
   width: $nav-width;
   overflow-x: auto;
   min-height: 100%;
@@ -83,10 +83,12 @@ body > nav {
   }
   
   li {
-    padding: 0.1em 0.5em;
+    padding: 0 0.5em;
   }
   
   a {
+    display: block;
+    padding: 0.1em 0;
     text-decoration: none;
     
     &:hover {
@@ -99,12 +101,12 @@ body > nav {
     margin-bottom: 1em;
   }
   
-  li.selected a {
+  a.selected {
     color: $color-selected;
   }
   
-  &.searching {
-    .toc li {
+  ol.searching {
+    a {
       display: none;
       
       &.matched {
@@ -162,10 +164,10 @@ $col-3: $nav-width + 2 * $left-width;
 @media screen and (max-width: $col-3) {
   body {
     display: block;
-    
-    > nav {
-      display: none;
-    }
+  }
+
+  #side-menu nav {
+    display: none;
   }
 }
 
