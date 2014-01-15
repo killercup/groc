@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>project</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="project"><meta name="groc-project-path" content="lib/project.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/project.coffee">lib/project.coffee</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="groc-api">groc API</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+<!DOCTYPE html><html lang="en"><head><title>project</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="project"><meta name="groc-project-path" content="lib/project.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/project.coffee">lib/project.coffee</a></code></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="groc-api">groc API</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
 path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 
 spate = <span class="hljs-built_in">require</span> <span class="hljs-string">'spate'</span>
@@ -19,11 +19,11 @@ to be relative to the project root, unless you pass an absolute path.</li>
 </ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-property">@outPath</span> = path.resolve <span class="hljs-property">@root</span>, outPath</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
 <li>Contains a set of files to generate documentation from, source code or otherwise.</li>
 </ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-property">@files</span> = []</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>Should strip specific prefixes of a file's path when generating relative paths for
+<li>Should strip specific prefixes of a file&#39;s path when generating relative paths for
 documentation.  For example, this could be used to ensure that <code>lib/some/source.file</code> maps
 to <code>doc/some/source.file</code> and not <code>doc/lib/some/source.file</code>.</li>
-</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-property">@stripPrefixes</span> = []</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annoyingly, we seem to be hitting a race condition within Node 0.10's
-emulation for old-style streams.  For now, we're dropping concurrent doc
+</ul></div></div><div class="code"><div class="wrapper">    <span class="hljs-property">@stripPrefixes</span> = []</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Annoyingly, we seem to be hitting a race condition within Node 0.10&#39;s
+emulation for old-style streams.  For now, we&#39;re dropping concurrent doc
 generation to play it safe.  People are still using groc with 0.6.</p></div></div><div class="code"><div class="wrapper">  oldNode = process.version.match <span class="hljs-regexp">/v0\.[0-8]\./</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>This is both a performance (over-)optimization and debugging aid.  Instead of spamming the
 system with file I/O and overhead all at once, we only process a certain number of source files
 concurrently.  This is similar to what <a href="https://github.com/isaacs/node-graceful-fs">graceful-fs</a>
@@ -69,4 +69,4 @@ so that they can strip from the remainder.</p></div></div><div class="code"><div
 
         <span class="hljs-property">@log</span>.info <span class="hljs-string">''</span>
         <span class="hljs-property">@log</span>.pass <span class="hljs-string">'Documentation generated'</span>
-        callback()</div></div></div></div></body></html>
+        callback()</div></div></div></div></div></body></html>

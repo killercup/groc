@@ -1,10 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><title>utils/style_helpers</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="utils/style_helpers"><meta name="groc-project-path" content="lib/utils/style_helpers.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/utils/style_helpers.coffee">lib/utils/style_helpers.coffee</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+<!DOCTYPE html><html lang="en"><head><title>utils/style_helpers</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="utils/style_helpers"><meta name="groc-project-path" content="lib/utils/style_helpers.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/utils/style_helpers.coffee">lib/utils/style_helpers.coffee</a></code></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
 
 _ = <span class="hljs-built_in">require</span> <span class="hljs-string">'underscore'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h1 id="style-helpers">Style Helpers</h1>
-
 <p>A collection of helpful functions to support styles and their behavior.</p></div></div><div class="code"><div class="wrapper"><span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = StyleHelpers =</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Generate a table of contents as a tree of {node: {...}, children: []} objects.
 We want a pretty complex hierarchy in our table of contents:
-buildTableOfContents: (files) -></p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Given an array of markdowned segments, convert their list of headers into a hierarchical
+buildTableOfContents: (files) -&gt;</p></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Given an array of markdowned segments, convert their list of headers into a hierarchical
 outline (table of contents!)</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-attribute">outlineHeaders</span>: <span class="hljs-function"><span class="hljs-params">(segments)</span> -&gt;</span>
     headers = segments.reduce <span class="hljs-function"><span class="hljs-params">( (a, s) -&gt; a.concat s.headers )</span>, []
     <span class="hljs-title">return</span> [] <span class="hljs-title">unless</span> <span class="hljs-title">headers</span>.<span class="hljs-title">length</span> &gt; 0
@@ -26,7 +25,7 @@ We want a pretty complex hierarchy in our table of contents:</p></div></div><div
       <span class="hljs-keyword">return</span>  <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> b.targetPath == <span class="hljs-string">'index'</span>
 
       <span class="hljs-keyword">return</span> <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> a.targetPath == b.targetPath</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>files matching a directory name come directly before it.  E.g. "foo" &lt; "foo/bar" &lt; "foz"</li>
+<li>files matching a directory name come directly before it.  E.g. &quot;foo&quot; &lt; &quot;foo/bar&quot; &lt; &quot;foz&quot;</li>
 </ul></div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">if</span> a.targetPath &lt; b.targetPath <span class="hljs-keyword">then</span> -<span class="hljs-number">1</span> <span class="hljs-keyword">else</span> <span class="hljs-number">1</span>
 
     nodes    = []
@@ -34,7 +33,7 @@ We want a pretty complex hierarchy in our table of contents:</p></div></div><div
     <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files
       targetChunks = file.targetPath.split path.join(<span class="hljs-string">'/'</span>)
       pathChunks   = targetChunks[<span class="hljs-number">0.</span>..-<span class="hljs-number">1</span>]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
-<li>If a file has the same name as a directory, it takes ownership of that directory's folder.</li>
+<li>If a file has the same name as a directory, it takes ownership of that directory&#39;s folder.</li>
 </ul></div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">for</span> chunk, i <span class="hljs-keyword">in</span> pathChunks
         <span class="hljs-keyword">if</span> prevPath[i] != chunk</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><ul>
 <li>Otherwise we have a generic folder node that takes its place in the table of contents.
@@ -56,7 +55,7 @@ If possible, we use the initial header in the file,</p></div></div><div class="c
         fileData.title       = fileData.firstHeader.data.title
 
         <span class="hljs-keyword">if</span> fileData.firstHeader.children?.length &gt; <span class="hljs-number">0</span>
-          outlines[file.targetPath] = fileData.firstHeader.children.concat outlines[file.targetPath]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Otherwise we just fall back to the file's target path...</p></div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span>
+          outlines[file.targetPath] = fileData.firstHeader.children.concat outlines[file.targetPath]</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Otherwise we just fall back to the file&#39;s target path...</p></div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">else</span>
         fileData.title = <span class="hljs-keyword">if</span> file.targetPath == <span class="hljs-string">'index'</span> <span class="hljs-keyword">then</span> file.pageTitle <span class="hljs-keyword">else</span> path.basename file.targetPath
 
       nodes.push
@@ -102,4 +101,4 @@ segment.</p></div></div><div class="code"><div class="wrapper">  <span class="hl
       <span class="hljs-keyword">else</span>
         results.push segment
 
-    results</div></div></div></div></body></html>
+    results</div></div></div></div></div></body></html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><title>styles/solarized</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="styles/solarized"><meta name="groc-project-path" content="lib/styles/solarized.coffee"><meta name="groc-github-url" content="https://github.com/nevir/groc"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="file-area"><div id="meta"><code class="file-path"><a href="https://github.com/nevir/groc/blob/master/lib/styles/solarized.coffee">lib/styles/solarized.coffee</a></code></div><div id="document"><div class="segment"><div class="code"><div class="wrapper">fs   = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs'</span>
+path = <span class="hljs-built_in">require</span> <span class="hljs-string">'path'</span>
+
+_            = <span class="hljs-built_in">require</span> <span class="hljs-string">'underscore'</span>
+coffeeScript = <span class="hljs-built_in">require</span> <span class="hljs-string">'coffee-script'</span>
+fsTools      = <span class="hljs-built_in">require</span> <span class="hljs-string">'fs-tools'</span>
+jade         = <span class="hljs-built_in">require</span> <span class="hljs-string">'jade'</span>
+uglifyJs     = <span class="hljs-built_in">require</span> <span class="hljs-string">'uglify-js'</span>
+humanize     = <span class="hljs-built_in">require</span> <span class="hljs-string">'../utils/humanize'</span>
+
+Default = <span class="hljs-built_in">require</span> <span class="hljs-string">'./default'</span>
+
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span> = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solarized</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Default</span></span>
+  <span class="hljs-attribute">STATIC_ASSETS</span>: [<span class="hljs-string">'style.css'</span>]
+
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
+    <span class="hljs-keyword">super</span>(args...)
+    <span class="hljs-property">@sourceAssets</span> = path.join __dirname, <span class="hljs-string">'solarized'</span>
+    <span class="hljs-property">@targetAssets</span> = path.resolve <span class="hljs-property">@project</span>.outPath, <span class="hljs-string">'assets'</span>
+
+    templateData  = fs.readFileSync path.join(<span class="hljs-property">@sourceAssets</span>, <span class="hljs-string">'docPage.jade'</span>), <span class="hljs-string">'utf-8'</span>
+    <span class="hljs-property">@templateFunc</span> = jade.compile templateData
+
+  <span class="hljs-attribute">writeTOC</span>:<span class="hljs-function"> -&gt;</span>
+    filename = path.join(<span class="hljs-property">@targetAssets</span>, <span class="hljs-string">'toc.json'</span>)
+    fs.writeFileSync filename, JSON.stringify(<span class="hljs-property">@tableOfContents</span>), <span class="hljs-string">'utf8'</span></div></div></div></div></div></body></html>
