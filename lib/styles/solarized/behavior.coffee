@@ -121,32 +121,51 @@ buildHeadlinesTree = (tree, ul, metaInfo) ->
 createNav = (metaInfo) ->
   $nav = $ """
     <aside id="side-menu">
-      <nav id="files">
+      <nav id="headlines">
         <details>
+          <summary>This File</summary>
+          <ul class="tools">
+            <li class="search">
+              <input id="search-headlines" type="search" autocomplete="off" placeholder="Search"/>
+            </li>
+          </ul>
+          <ol class="tree" id="headline-tree"></ol>
+        </details>
+      </nav>
+      <nav id="files">
+        <details open>
           <summary>Files</summary>
           <ul class="tools">
             <li class="search">
               <input id="search-files" type="search" autocomplete="off" placeholder="Search"/>
             </li>
           </ul>
-          <ol class="tree" id="file-tree"/>
-        </details>
-      </nav>
-      <nav id="headlines">
-        <details>
-          <summary>Headlines</summary>
-          <ul class="tools">
-            <li class="search">
-              <input id="search-headlines" type="search" autocomplete="off" placeholder="Search"/>
-            </li>
-          </ul>
-          <ol class="tree" id="headline-tree"/>
+          <ol class="tree" id="file-tree"></ol>
         </details>
       </nav>
     </aside>
   """
 
   return $nav
+
+###
+## Add Button to Toggle Side Menu Visibility
+@param {jQuery} $container The element the button should be prepended to
+@param {jQuery} $nav The navigation element; class 'open' will be toggled
+@return {jQuery} $container element
+###
+createMenuToggle = ($container, $nav) ->
+  $button = $ """<button type="button" class="toggle-menu">
+    Menu
+  </button>"""
+
+  $button.on 'click', (event) ->
+    event.preventDefault()
+    $nav.toggleClass 'open'
+
+  $container.prepend $button
+
+  return $container
 
 ###
 ## Search Tree
@@ -244,5 +263,7 @@ $ ->
 
   $nav = buildNav globalFileTree, metaInfo
   $nav.prependTo $('body')
+
+  createMenuToggle $('#meta'), $nav
 
 

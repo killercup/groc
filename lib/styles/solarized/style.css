@@ -13,6 +13,16 @@ code, pre, .segment .comments pre, code, pre, .segment .code {
   font-size: 14px;
   line-height: 22.4px; }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
 .doc-section-header {
   font-weight: bold; }
 
@@ -170,13 +180,9 @@ body {
     .segment .code .tex .hljs-formula {
       background: #073642; }
 
-@media screen and (max-width: 74em) {
+@media screen and (max-width: 60em) {
   body {
     display: block; }
-  #side-menu nav {
-    display: none; } }
-
-@media screen and (max-width: 60em) {
   .segment {
     padding: 0.5em; }
     .segment .code, .segment .comments {
@@ -189,7 +195,23 @@ body {
       max-width: 100%;
       display: block;
       overflow-x: auto;
-      overflow-y: hidden; } }
+      overflow-y: hidden; }
+  #side-menu {
+    display: none; }
+    #side-menu.open {
+      display: block; }
+    #side-menu nav {
+      width: auto; } }
+
+@media screen and (max-width: 74em) {
+  #side-menu {
+    display: none; }
+    #side-menu.open {
+      display: block; } }
+
+@media screen and (min-width: 74.1em) {
+  #meta .toggle-menu {
+    display: none; } }
 
 body {
   background: #002b36;
@@ -197,6 +219,14 @@ body {
 
 a {
   color: #859900; }
+
+#meta .toggle-menu {
+  background: #fefcf6;
+  color: #002b36;
+  padding: 0.2em 0.5em;
+  border: 0;
+  display: inline-block;
+  margin-right: 0.5em; }
 
 #document {
   background-color: #002b36;

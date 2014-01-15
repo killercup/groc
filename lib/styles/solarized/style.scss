@@ -18,6 +18,17 @@ code, pre, %code-font {
   line-height: 1.4 * 16px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 .doc-section-header {
   font-weight: bold;
 }
@@ -181,19 +192,16 @@ body {
   }
 }
 
-$col-3: $nav-width + 2 * $left-width;
+// ## Responsive
 
-@media screen and (max-width: $col-3) {
+// ### One Column
+$col-2: 2 * $left-width; // in em
+
+@media screen and (max-width: $col-2) {
   body {
     display: block;
   }
 
-  #side-menu nav {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 2 * $left-width) {
   .segment {
     padding: 0.5em;
 
@@ -208,6 +216,39 @@ $col-3: $nav-width + 2 * $left-width;
       @include scroll-box;
     }
   }
+
+  #side-menu {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+
+    nav {
+      width: auto;
+    }
+  }
+}
+
+// ### Two Columns
+$col-3: $nav-width + 2 * $left-width; // in em
+
+@media screen and (max-width: $col-3) {
+  #side-menu {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+// ### Three Columns
+
+@media screen and (min-width: $col-3 + 0.1em) {
+  #meta .toggle-menu {
+    display: none;
+  }
 }
 
 // ## Color
@@ -218,6 +259,17 @@ body {
 
 a {
   color: $text-link-color;
+}
+
+#meta {
+  .toggle-menu {
+    background: $text-background;
+    color: $body-background;
+    padding: 0.2em 0.5em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
 }
 
 #document {
