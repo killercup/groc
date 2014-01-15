@@ -1,3 +1,11 @@
+# # Solarized
+#
+# A style using the [Solarized] color scheme, PT Sans and PT Mono fonts by
+# [ParaType] and a side menu (files and headlines), that also works on mobile.
+#
+# [Solarized]: http://ethanschoonover.com/solarized
+# [ParaType]: http://www.paratype.com/public/
+
 fs   = require 'fs'
 path = require 'path'
 
