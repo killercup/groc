@@ -2,6 +2,8 @@
 @import "flex-box";
 @import "highlight-solarized-dark";
 @import "highlight-solarized-light";
+@import "pygments-solarized-dark";
+@import "pygments-solarized-light";
 
 // ## Fonts
 @import url(http://fonts.googleapis.com/css?family=PT+Mono);
@@ -192,7 +194,8 @@ body {
     
     pre {
       @extend %code-font;
-      @include solarized-light('code');
+      @include highlightjs-solarized-light('code');
+      @include pygments-solarized-light;
 
       code {
         @include scroll-box;
@@ -205,7 +208,8 @@ body {
     padding-top: 0.5em;
     
     @extend %code-font;
-    @include solarized-dark();
+    @include highlightjs-solarized-dark();
+    @include pygments-solarized-dark;
   }
 }
 
