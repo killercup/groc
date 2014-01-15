@@ -1,4 +1,5 @@
 @import "helpers";
+@import "flex-box";
 @import "highlight-solarized-dark";
 @import "highlight-solarized-light";
 
@@ -74,14 +75,19 @@ ul, ol {
 
 // ### flex
 body {
-  display: flex;
+  @include display(flex);
 
-  #side-menu nav {
-    //flex: 1;
-  }
+  #side-menu nav {}
   
   #file-area {
-    flex: 1;
+    @include display(flex);
+    
+    @include flex(1);
+    @include flex-direction(column);
+
+    #document {
+      @include flex-grow(1);
+    }
   }
 }
 
@@ -89,7 +95,10 @@ body {
   width: $nav-width;
   overflow-x: auto;
   background: darken($body-background, 2%);
-  margin-bottom: 1em;
+  
+  + nav {
+    margin-top: 1em;
+  }
   
   ul, ol {
     list-style: none;
