@@ -6,7 +6,7 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Mono);
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
 
-body {
+body, %font {
   font-size: 16px;
   font-family: 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.4;
@@ -262,10 +262,13 @@ a {
 }
 
 #meta {
+  word-wrap: break-word;
+
   .toggle-menu {
+    @extend %font;
     background: $text-background;
     color: $body-background;
-    padding: 0.2em 0.5em;
+    padding: 0.2em 1em;
     border: 0;
     display: inline-block;
     margin-right: 0.5em;
