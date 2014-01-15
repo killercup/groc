@@ -824,7 +824,17 @@ index = [(File||Folder)];
             "projectPath": "lib/styles/solarized.coffee",
             "targetPath": "styles/solarized",
             "pageTitle": "styles/solarized",
-            "title": "solarized"
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Solarized",
+                "slug": "solarized",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Solarized"
           },
           "depth": 2,
           "outline": [],
