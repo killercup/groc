@@ -79,6 +79,11 @@ body {
 
 #meta {
   padding: 0.5em; }
+  #meta .toggle-menu {
+    padding: 0.2em 1em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em; }
 
 .segment {
   clear: both;
@@ -224,11 +229,7 @@ a {
   word-wrap: break-word; }
   #meta .toggle-menu {
     background: #fefcf6;
-    color: #002b36;
-    padding: 0.2em 1em;
-    border: 0;
-    display: inline-block;
-    margin-right: 0.5em; }
+    color: #002b36; }
 
 #document {
   background-color: #002b36;

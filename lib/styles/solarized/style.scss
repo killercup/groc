@@ -152,6 +152,14 @@ body {
 
 #meta {
   padding: 0.5em;
+
+  .toggle-menu {
+    @extend %font;
+    padding: 0.2em 1em;
+    border: 0;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
 }
 
 .segment {    
@@ -265,13 +273,8 @@ a {
   word-wrap: break-word;
 
   .toggle-menu {
-    @extend %font;
     background: $text-background;
     color: $body-background;
-    padding: 0.2em 1em;
-    border: 0;
-    display: inline-block;
-    margin-right: 0.5em;
   }
 }
 
