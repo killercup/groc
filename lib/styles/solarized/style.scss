@@ -184,10 +184,10 @@ body {
   .code {
     display: inline-block;
     vertical-align: top;
-    padding: 0 $side-padding;
   }
   
   .comments {
+    padding: 0 $side-padding;
     width: $left-width - (2 * $side-padding);
     margin-left: -1 * $left-width;
     white-space: normal;
@@ -206,6 +206,7 @@ body {
   .code {
     white-space: pre;
     padding-top: 0.5em;
+    margin-left: $side-padding;
     
     @extend %code-font;
     @include highlightjs-solarized-dark();
@@ -219,10 +220,6 @@ body {
 $col-2: 2 * $left-width; // in em
 
 @media screen and (max-width: $col-2) {
-  body {
-    display: block;
-  }
-
   .segment {
     padding: 0.5em;
 
@@ -238,17 +235,22 @@ $col-2: 2 * $left-width; // in em
     }
   }
 
-  #side-menu {
-    display: none;
+  // #side-menu {
+  //   display: none;
 
-    &.open {
-      display: block;
-    }
+  //   + #file-area {
+  //     position: relative;
+  //     left: 0;
+  //   }
 
-    nav {
-      width: auto;
-    }
-  }
+  //   &.open {
+  //     display: block;
+
+  //     + #file-area {
+  //       left: $nav-width;
+  //     }
+  //   }
+  // }
 }
 
 // ### Two Columns
@@ -256,10 +258,15 @@ $col-3: $nav-width + 2 * $left-width; // in em
 
 @media screen and (max-width: $col-3) {
   #side-menu {
-    display: none;
+    visibility: hidden;
+    width: 0;
+    overflow-x: hidden;
+    transition: width 0.3s ease-in-out; 
 
     &.open {
-      display: block;
+      visibility: visible;
+      width: $nav-width;
+      overflow-x: auto;
     }
   }
 }
